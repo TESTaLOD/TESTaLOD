@@ -3,11 +3,10 @@ from flask import Flask, render_template, request
 #import requests
 from cq_test_machine import *
 import time
-#from werkzeug.utils import secure_filename
-
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-
+app.config['UPLOAD_FOLDER'] = 'temp'
 
 @app.route('/')
 def index():
@@ -42,15 +41,16 @@ def test_finder ():
         ntot = len(test_list)
         return render_template('index.html', data=test_list, leng=ntot, active='2')
     except:
-        test_list = list()
         req_list = request.files.getlist('localfile')
-        print(req_list)
         start = time.time()
         list_local = list()
         for filesreq in req_list:
-            print("hiiiiii")
-            list_local.append(testaction(filesreq.read(), None))
+            filename = secure_filename(filesreq.filename)
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filesreq.save(filepath)
 
+            list_local.append(testaction(filepath, "Toyset"))
+            os.remove(filepath)
         end = time.time()
         timetot = round(end - start, 2)
         stats = statmaker(list_local, timetot)

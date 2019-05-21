@@ -140,7 +140,6 @@ def finder(url, filekeyword, parent):
 def testaction (test, toysetkeyword):
 
         onto = get_ontology(test).load()
-
         ontolist = list()
         ontolist.append(test)
 
