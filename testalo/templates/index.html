@@ -1,0 +1,388 @@
+<html>
+<head>
+        <meta name="viewport" content="width=device-width">
+        <title>CQ TESTER</title>
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <style>
+
+        .loader {
+          margin: auto;
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 150px;
+          height: 150px;
+          -webkit-animation: spin 1s linear infinite; /* Safari */
+          animation: spin 1s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .custom-control-label::before, 
+        .custom-control-label::after {
+        top: .1rem;
+        width: 1.25rem;
+        height: 1.25rem;
+        }
+
+        .liststep2 ul {
+          list-style-type: none;
+        }
+
+          
+        </style>
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h1 class="navbar-brand">
+          ArCO Testing
+        </h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </nav>
+    <div class="container-fluid" style="padding: 0px;">
+    <div class ="row" style="width: 100%; margin: 0px; min-height: 100% ">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+                <div class="accordion" id="accordionExample">
+
+
+
+                    <!-- FIRST STEP -->
+                        <div class="card">
+                          <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                {% if active=="1" %}
+                                <button class="btn btn-link" id="step1btn" type="button" data-toggle="collapse" data-target="#step1" aria-expanded="true" aria-controls="collapseOne">
+                                    STEP #1
+                                  </button>
+                                
+                                {% else %}
+                                <button class="btn btn-link" id="step1btn" type="button" data-toggle="collapse" data-target="#step1" aria-expanded="true" aria-controls="collapseOne" disabled>
+                                    STEP #1
+                                  </button>
+                                
+                                {% endif %}
+                              
+                            </h5>
+                          </div>
+                          <div id="step1" class="collapse {% if active=='1' %}show{%endif %}" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                    <form action="/" method="POST" enctype=multipart/form-data>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="customRadio" name="input-path" value="url" checked>
+                                                <label class="custom-control-label" for="customRadio">CQ GITHUB FOLDER URL</label>
+                                              </div>
+                                              <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="customRadio2" name="input-path" value="local">
+                                                <label class="custom-control-label" for="customRadio2">CQ LOCAL FILES</label>
+                                              </div>
+                                              <div id="holder">
+                                                  <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/ICCD-MiBACT/ArCo/tree/master/ArCo-release/test/CQ" required>
+                                              </div>
+                                            <div id="keywordlabelholder">
+                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
+                                              <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue"  onchange="keycheck(this)">
+                                              <label class="custom-control-label" for="keytrue">CQ FILE KEYWORD</label>
+                                            </div>
+                                            <div id="keyword-holder"> </div>
+                                          <small id="emailHelp" class="form-text text-muted">Retrieve all files having KEYWORD from this path</small>
+                                        </div>
+                                        </div>
+                                        <button id="fire1" type="submit" class="btn btn-primary">GO!</button>
+                                      </form>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+                <!-- SECOND STEP -->
+                        <div class="card">
+                          <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                {% if active=="2" %}
+                                <button class="btn btn-link" id="step2btn" type="button" data-toggle="collapse" data-target="#step2" aria-expanded="true" aria-controls="collapseTwo">
+                                    STEP #2
+                                  </button>
+                                
+                                {% else %}
+                                <button class="btn btn-link" id="step2btn" type="button" data-toggle="collapse" data-target="#step2" aria-expanded="true" aria-controls="collapseTwo" disabled>
+                                    STEP #2
+                                  </button>
+                                
+                                {% endif %}
+                            </h5>
+                          </div>
+                          <div id="step2" class="collapse {% if active=='2' %}show{%endif %}"  aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                    <div style ="padding: 5px">
+                                        <div align="right">
+                                            <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 1</button>
+                                            </div>
+                                            {% if data %}
+                                                     
+                                                    <div class="card-title">
+                                                            <h3> <span id="counter"></span> selected</h3>
+                                                            <div class="form-group">
+                                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
+                                                              <input class="custom-control-input" type="checkbox" name="sel" id="selall" value="selall" checked onclick="ccchange(this)"> 
+                                                              <label class="custom-control-label"  for="selall">SELECT ALL</label>
+                                                            </div>
+                                                    </div>
+                                                    <form id="files" action= "/test"  method="POST">
+                                                        <div class="form-group">
+                                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
+                                                                <input type="checkbox" class="custom-control-input" id="toysetcheck" name="toysetcheck"  onchange="toysetcheckact(this)">
+                                                                <label class="custom-control-label" for="toysetcheck">CQ TOYSET KEYWORD</label>
+                                                              </div>
+                                                              <div id="toysetkeyword-holder"> </div>
+
+                                                      
+                                                          <small id="emailHelp" class="form-text text-muted">If some toy-dataset-files are used as InputTestData they will be traced trough TOYSET-KEYWORD</small>
+                                                        </div>
+                                                        <div class="card-title">
+                                                            <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                                    </div>
+                                            
+                                          {% macro listing(input, newkey) %}
+                                            {% for key,value in input.items() if value is not none %}
+                                            <details open class="liststep2">
+                                              {% if newkey  %}
+                                              <summary><b>{{ key.split('master')[1]|replace(newkey.split('master')[1], "") }}</b></a> 
+                                              {% elif "master" in key %}
+                                              <summary><b>{{ key.split('master')[1] }}</b></a> 
+                                              {% else %}
+                                              <summary><b>{{ key }}</b></a> 
+                                                {% endif %}
+                                              
+                                              </summary>
+                                            <ul>
+                                            {% for item in input[key] recursive %}
+                                            {% if item is mapping %}
+                                            {{ listing(item, key) }}
+                                            {% else %}
+                                            <li>
+                                            <div class="custom-control custom-checkbox" style="margin-bottom: 10px">
+                                                <input class="custom-control-input" type="checkbox" name="test" checked value= {{ item }} id= {{ item }}>
+                                                <label class="custom-control-label"  for= {{ item }}>
+                                                    {% set keyrep = key|string %}
+                                                    <a href= {{ item }} target="_blank"> {{ item.split('master')[1]|replace(key.split('master')[1], "") }}</a>  </label>
+                                              </div>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                                            </ul>
+                                            </details>
+                                            {% endfor %}
+                                            {% endmacro %}
+                                            {{ listing(data, None) }}
+                                            {% if data|length > 20 %}
+                                            <div class="card-title">
+                                              <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                            </div>
+                                            {% endif %}
+                                            </form>   
+                                            </div>
+                                            {% endif %}
+            
+                                    </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                <!-- THIRD STEP -->
+                        <div class="card">
+                          <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                {% if active=="3" %}
+                                <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree">
+                                    STEP #3
+                                  </button>
+                                
+                                {% else %}
+                                <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree" disabled>
+                                    STEP #3
+                                  </button>
+                                
+                                {% endif %}
+                            </h5>
+                          </div>
+                          <div id="step3" class="collapse {% if active=='3' %}show{%endif %}" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <div class="card-title" align="right">
+                                <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 2</button>
+                                {% if result and stats %}
+                                <div class="row bg-light" style="padding-top: 20px; padding-bottom: 20px; margin-top: 10px;" align="center">
+                                  <div class="col-3"><h3>TOT {{ result|length }}</h3></div>
+                                  <div class="col-2"><i class="fas fa-check-circle fa-2x text-success"></i> <h3 style= "display: inline">{{ stats[0] }}</h3></div>
+                                  <div class="col-2"><i class="fas fa-question-circle fa-2x text-warning"></i> <h3 style= "display: inline">{{ stats[1] }}</h3></div>
+                                  <div class="col-2"><i class="fas fa-times-circle fa-2x text-danger"></i> <h3  style= "display: inline"> {{ stats[2] }}</h3></div>
+                                  <div class="col-3">
+                                        <h3>{{ stats[3] }}″</h3>
+                                  </div>
+                                </div>
+                                {% endif %}
+                                </div>
+                                {% if result %}
+                                <ul>
+                                {% for dicti in result %}
+                                      <li style="list-style-type: none; margin-bottom:10px">
+                                                                          
+                                          {% if dicti["status"] == True and not dicti["missing"] %}
+                                          <i class="fas fa-check-circle text-success fa-lg"></i> 
+                                          {% elif dicti["status"] == False %}
+                                          <i class="fas fa-times-circle text-danger fa-lg"></i> 
+                                          {% elif dicti["status"] == True and dicti["missing"] %}
+                                          <i class="fas fa-question-circle text-warning fa-lg"></i> 
+                                          {% endif %}
+                                        
+                                        <a href= {{ dicti["input"][0] }} target="_blank"> {{ dicti["input"][0] }}</a>    
+                                        
+                                        <a data-toggle="modal" style="cursor:pointer;" data-target= {{ "#modal" + loop.index|string }}>
+                                          <i class="fas fa-file-alt fa-lg"></i>
+                                        </a>
+                                        <a href= {{ dicti["input"][0]|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
+                                            <i class="fab fa-github fa-lg"></i>
+                                        </a></li>
+  
+
+
+                                        <!-- Modal -->
+                                      <div class="modal fade" id= {{ "modal" + loop.index|string }} tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" style= "max-width: 1000px !important" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">{{ dicti["input"][0] }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                
+                                                    {% if dicti["status"] == True and not dicti["missing"] %}
+                                                    <div class="alert alert-success" style="margin: 20px">
+                                                        <b>All Matched</b>
+                                                    </div>
+                                                    <ul>
+                                                        <li style="margin-bottom: 10px">
+                                                            <b>HasExpectedResult: </b>{{ dicti["input"][1] }}
+                                                        </li>
+                                                    {% elif dicti["status"] == False %}
+                                                    <div class="alert alert-danger" style="margin: 20px">
+                                                        <b>None Matched</b>
+                                                    </div>
+                                                    <ul>
+                                                        <li style="margin-bottom: 10px">
+                                                            <b>HasExpectedResult: </b>{{ dicti["input"][1] }}
+                                                        </li>
+                                                  {% elif dicti["status"] == True and dicti["missing"] %}
+                                                    <div class="alert alert-warning" style="margin: 20px">
+                                                        <b>Missing {{ dicti["missingnumber"]|int }} element{% if dicti["missingnumber"]|int > 1 %}s{% endif %}: </b>
+                                                      </div>
+                                                        <ul>
+                                                        <li style="margin-bottom: 10px">
+                                                        <b>HasExpectedResult: </b>
+                                                        <ul style="list-style-type: none;">
+                                                        {% for elem in dicti["missing"] %}
+                                                        {% if elem.color == "Green" %}
+                                                        <li class="alert alert-success">{{ elem.content }}</li>
+                                                        {% elif elem.color == "Red" %}
+                                                        <li class="alert alert-danger">{{ elem.content }}</li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                      </ul>
+                                                      </li>
+                                                    {% endif %}
+                                                    
+                                                  <li style="margin-bottom: 10px">
+                                                      <b>HasInputTestData: </b> <a href= {{ dicti["input"][2] }} target="_blank">{{ dicti["input"][2] }}</a>
+                                                  </li>
+                                                  <li style="margin-bottom: 10px">
+                                                      <b>HasSPARQLQueryUnitTest:</b>{{ dicti["input"][3] }}
+                                                  </li>
+                                                </ul>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                {% endfor %}
+                              </ul>
+                              {% endif %}
+                              {% if problem %}
+                              <div class="bg-danger text-light" style="padding: 5px">
+                                <h3>Error Input at:</h3>
+                                <a target="_blank" class="text-light" href= {{ problem }}>{{ problem }}</a>
+                                <a href= {{ problem|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
+                                  <i class="fab fa-github fa-lg text-light"></i>
+                              </a></li>
+                              </div>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+            </div>
+              <div class="col-md-2"></div>
+            </div>
+
+
+            <!--LOADING-->
+            {% if active=="2" %}
+            <div class="modal fade" id="load" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content" style="background: transparent !important; border: 0 !important">
+                    <div class="loader"></div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+
+
+
+          <!--FOOTER-->
+            <footer class="footer bg-dark text-white" style="margin-bottom: 0px; padding: 20px">
+            
+                <div class="container-fluid text-center py-2" style="font-size: 80%">
+                        <div  style="margin-bottom: 10px">
+                                <b>Powered by:</b>
+                                <a href="http://flask.pocoo.org/" class="text-light">Flask</a>, 
+                                <a href="https://getbootstrap.com/" class="text-light">Bootstrap</a>, 
+                                <a href="http://jinja.pocoo.org/" class="text-light">Jinja</a> 
+                        </div>
+                          
+                
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" style="color: grey" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+     
+              </footer>
+        <script src="{{ url_for('static', filename='engine.js') }}">
+
+        
+        </script>
+</body>
+
+</html>

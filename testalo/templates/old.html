@@ -1,0 +1,98 @@
+<html>
+<head>
+        <meta name="viewport" content="width=device-width">
+        <title>CQ TESTER</title>
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class ="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <form action="http://localhost:5000/" method="POST">
+                <div class="form-group">
+                  <label for="urlinput">CQ GITHUB FOLDER URL</label>
+                  <input type="text" class="form-control" id="urlinput" name="url" placeholder="Enter url" required>
+                  <small id="emailHelp" class="form-text text-muted">Retrieve all files named "testcase" from this path (github only)</small>
+                </div>
+        
+                <button type="submit" class="btn btn-primary">GO!</button>
+              </form>
+            </div>
+              <div class="col-md-3"></div>
+            </div>
+        <div class="row output">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                       <div>
+                                {% if data %}
+                                <div class="card" style ="padding: 5px">
+                                         
+                                        <div class="card-title">
+                                                <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sel" id="selall" value="selall" checked>
+                                                                <label class="form-check-label" for="selall">
+                                                                  SELECT ALL
+                                                                </label>
+                                                              </div>
+                                                              <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="sel" id="selnon" value="selnon">
+                                                                <label class="form-check-label" for="selnon">
+                                                                  DESELECT ALL
+                                                                </label>
+                                                </div>
+                                        </div>
+                                        <form id="files" action= {{ url_for('test') }}  method="POST">
+                                        <div class="card-title">
+                                                <button type="submit" class="btn btn-primary">TEST!</button>
+                                        </div>
+                                         
+                                {% for item in data %}
+                                <div class="form-check" style="margin-bottom: 10px">
+                                                <input class="form-check-input" type="checkbox" name="test" checked value= {{ item }} id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                               <a href= {{ item }} > {{ item }}</a>
+                                                </label>
+                                              </div>
+                                {% endfor %}
+                                </form>   
+                                </div>
+                                {% endif %}
+
+                        </div>
+<!--                         {% for item in data %}
+                            <a href= {{ item[0] }} ><b> {{ item[0] }} </b></a>
+                            <ul>
+                            <li><b>hasExpectedResult: </b> {{ item[1][0] }} </li>
+                            <li><b>hasInputTestData: </b><a  href= {{ item[2][0] }} > {{ item[2][0] }}</a></li>
+                            <li><b>hasSPARQLQueryUnitTest: </b> {{ item[3][0] }} </li>
+                            </ul>
+                    {% endfor %} -->
+                </div>
+                <div class="col-md-2"></div>
+        </div>
+        <script>
+                
+        $('input[type=radio][name=sel]').change(function() {
+            switch ($(this).val()) {
+                case 'selall':
+                        $("form#files :input").each(function(){
+                                var input = $(this);
+                                input.prop('checked', true);
+                        });
+                    break
+                case 'selnon':
+                        $("form#files :input").each(function(){
+                                var input = $(this);
+                                input.prop('checked', false);
+                        });
+                    break
+            }
+        })
+        </script>
+</body>
+
+</html>
