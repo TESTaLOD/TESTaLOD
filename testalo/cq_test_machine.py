@@ -3,7 +3,7 @@ import json
 import rdflib
 from SPARQLWrapper import SPARQLWrapper, JSON
 import requests
-
+from owlready2 import *
 
 
 def unescaper(string):
@@ -136,3 +136,29 @@ def finder(url, filekeyword, parent):
     else:
         dict_test[parent] = None
     return dict_test
+
+def testaction (test, toysetkeyword):
+
+        onto = get_ontology(test).load()
+
+        ontolist = list()
+        ontolist.append(test)
+
+        expecteddata = list(onto.metadata.hasExpectedResult)[0]
+        ontolist.append(expecteddata)
+
+        inputtestdata = list(onto.metadata.hasInputTestData)[0]
+        ontolist.append(inputtestdata)
+
+        querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
+        ontolist.append(querydata)
+
+        status, missing, missinglist = final_function(inputtestdata, querydata, expecteddata, toysetkeyword)
+        resultdict = dict()
+
+        resultdict["input"] = ontolist
+        resultdict["status"] = status
+        resultdict["missing"] = missinglist
+        resultdict["missingnumber"] = missing
+
+        return resultdict
