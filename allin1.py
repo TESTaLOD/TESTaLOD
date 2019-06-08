@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
-#from owlready2 import *
 from cq_test_machine import *
-import time, shutil
+import time
 from werkzeug.utils import secure_filename
-import uuid
-from flask_socketio import SocketIO, emit
+
 
 app = Flask(__name__)
 
