@@ -28,8 +28,8 @@ def query_on_toyset(query_string, toyset_string):
     query_result = json_cleaner(qres.serialize(format="json"))
     return query_result
 
-def query_on_data(string):
-    sparql = SPARQLWrapper("http://wit.istc.cnr.it/arco/virtuoso/sparql")
+def query_on_data(string, endpoint):
+    sparql = SPARQLWrapper(endpoint)
     sparql.setQuery(string)
     sparql.setReturnFormat(JSON)
     query_result = sparql.query().convert()
@@ -74,11 +74,13 @@ def json_comparer_stronzo(query_result, expected_result):
             return True, check_list
 
 
-def final_function (toyset_string, query_string, expected_string, toysetkeyword): #se cambio l'ordine degli input non funziona lul, forse se li seescapassimo e salvassimo in variabili diverse potremmo metterli come ci pare, così l'algoritmo è più robusto
+def final_function (toyset_string, query_string, expected_string, toysetkeyword, endpoint): #se cambio l'ordine degli input non funziona lul, forse se li seescapassimo e salvassimo in variabili diverse potremmo metterli come ci pare, così l'algoritmo è più robusto
     if toysetkeyword and toysetkeyword in str(toyset_string):
         return json_comparer(query_on_toyset(unescaper(query_string), unescaper(toyset_string)), json_cleaner(unescaper(expected_string)))
+    elif endpoint:
+        return json_comparer(query_on_data(unescaper(query_string), endpoint), json_cleaner(unescaper(expected_string)))
     else:
-        return json_comparer(query_on_data(unescaper(query_string)), json_cleaner(unescaper(expected_string)))
+        return "nodata", None, None
 
 def statmaker (listot, time):
     good = 0
@@ -137,7 +139,7 @@ def finder(url, filekeyword, parent):
         dict_test[parent] = None
     return dict_test
 
-def testaction (test, toysetkeyword):
+def testaction (test, toysetkeyword, endpoint):
 
         onto = get_ontology(test).load()
         ontolist = list()
@@ -152,12 +154,16 @@ def testaction (test, toysetkeyword):
         querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
         ontolist.append(querydata)
 
-        status, missing, missinglist = final_function(inputtestdata, querydata, expecteddata, toysetkeyword)
-        resultdict = dict()
+        status, missing, missinglist = final_function(inputtestdata, querydata, expecteddata, toysetkeyword, endpoint)
 
-        resultdict["input"] = ontolist
-        resultdict["status"] = status
-        resultdict["missing"] = missinglist
-        resultdict["missingnumber"] = missing
+        if status == "nodata":
+            return "nodata"
+        else:
+            resultdict = dict()
 
-        return resultdict
+            resultdict["input"] = ontolist
+            resultdict["status"] = status
+            resultdict["missing"] = missinglist
+            resultdict["missingnumber"] = missing
+
+            return resultdict

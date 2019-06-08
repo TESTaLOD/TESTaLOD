@@ -1,7 +1,7 @@
 <html>
 <head>
         <meta name="viewport" content="width=device-width">
-        <title>CQ TESTER</title>
+        <title>TESTALO</title>
         <!--Bootstrap-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -43,21 +43,21 @@
         .liststep2 ul {
           list-style-type: none;
         }
-
+        .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
           
         </style>
 
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 1rem">
         <h1 class="navbar-brand">
-          ArCO Testing
+          TESTALO
         </h1>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
             </nav>
+
+            <a href="https://github.com/vale-fabio/testalo" class="github-corner" aria-label="View source on GitHub" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
     <div class="container-fluid" style="padding: 0px;">
     <div class ="row" style="width: 100%; margin: 0px; min-height: 100% ">
         <div class="col-md-2">
@@ -108,6 +108,9 @@
                                             <div id="keyword-holder"> </div>
                                           <small id="emailHelp" class="form-text text-muted">Retrieve all files having KEYWORD from this path</small>
                                         </div>
+                                        <div class="form-group" id="local-para">
+                                            
+                                        </div>
                                         </div>
                                         <button id="fire1" type="submit" class="btn btn-primary">GO!</button>
                                       </form>
@@ -118,9 +121,9 @@
 
 
 
-
+                {% if local==False %}
                 <!-- SECOND STEP -->
-                        <div class="card">
+                        <div class="card" id="step2">
                           <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
                                 {% if active=="2" %}
@@ -142,31 +145,45 @@
                                         <div align="right">
                                             <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 1</button>
                                             </div>
-                                            {% if data %}
+
                                                      
                                                     <div class="card-title">
+                                                        {% if data %}
                                                             <h3> <span id="counter"></span> selected</h3>
                                                             <div class="form-group">
                                                             <div class="custom-control custom-checkbox" style="margin-top:20px">
                                                               <input class="custom-control-input" type="checkbox" name="sel" id="selall" value="selall" checked onclick="ccchange(this)"> 
                                                               <label class="custom-control-label"  for="selall">SELECT ALL</label>
                                                             </div>
-                                                    </div>
+                                                            </div>
+                                                            {% endif %}
                                                     <form id="files" action= "/test"  method="POST">
                                                         <div class="form-group">
                                                             <div class="custom-control custom-checkbox" style="margin-top:20px">
-                                                                <input type="checkbox" class="custom-control-input" id="toysetcheck" name="toysetcheck"  onchange="toysetcheckact(this)">
+                                                                <input oninvalid="this.setCustomValidity('Please select at least CQ TOYSET KEYWORD or CQ SPARQL ENDPOINT URL')" oninput="setCustomValidity('')" type="checkbox" class="parameter custom-control-input" id="toysetcheck" name="toysetcheck"  onchange="toysetcheckact(this)" required>
                                                                 <label class="custom-control-label" for="toysetcheck">CQ TOYSET KEYWORD</label>
                                                               </div>
                                                               <div id="toysetkeyword-holder"> </div>
 
                                                       
                                                           <small id="emailHelp" class="form-text text-muted">If some toy-dataset-files are used as InputTestData they will be traced trough TOYSET-KEYWORD</small>
+
+                                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
+                                                                <input type="checkbox" class="parameter custom-control-input" id="endpointcheck" name="endpointcheck"  onchange="endpointcheckact(this)" required>
+                                                                <label class="custom-control-label" for="endpointcheck">CQ SPARQL ENDPOINT URL</label>
+                                                              </div>
+                                                              <div id="endpointcheck-holder"> </div>
+
+                                                      
+                                                          <small id="emailHelp" class="form-text text-muted">CQ will be executed on selected SPARQL ENDPOINT</small>
                                                         </div>
+
                                                         <div class="card-title">
-                                                            <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                                            <!--data-toggle="modal" data-target="#load"-->
+                                                            <button id="fire2" type="submit" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
                                                     </div>
-                                            
+
+                                                  {% if data %}
                                           {% macro listing(input, newkey) %}
                                             {% for key,value in input.items() if value is not none %}
                                             <details open class="liststep2">
@@ -186,7 +203,7 @@
                                             {% else %}
                                             <li>
                                             <div class="custom-control custom-checkbox" style="margin-bottom: 10px">
-                                                <input class="custom-control-input" type="checkbox" name="test" checked value= {{ item }} id= {{ item }}>
+                                                <input class="custom-control-input" type="checkbox" name="test" checked value= {{ item }} id= {{ item }} required>
                                                 <label class="custom-control-label"  for= {{ item }}>
                                                     {% set keyrep = key|string %}
                                                     <a href= {{ item }} target="_blank"> {{ item.split('master')[1]|replace(key.split('master')[1], "") }}</a>  </label>
@@ -201,18 +218,19 @@
                                             {{ listing(data, None) }}
                                             {% if data|length > 20 %}
                                             <div class="card-title">
-                                              <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                              <button id="fire3" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
                                             </div>
+                                            {% endif %}
                                             {% endif %}
                                             </form>   
                                             </div>
-                                            {% endif %}
+
             
                                     </div>
                             </div>
                           </div>
                         </div>
-
+                        {% endif %}
 
 
 
@@ -222,12 +240,12 @@
                             <h5 class="mb-0">
                                 {% if active=="3" %}
                                 <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree">
-                                    STEP #3
+                                    RESULTS
                                   </button>
                                 
                                 {% else %}
                                 <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree" disabled>
-                                    STEP #3
+                                    RESULTS
                                   </button>
                                 
                                 {% endif %}
@@ -236,7 +254,11 @@
                           <div id="step3" class="collapse {% if active=='3' %}show{%endif %}" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="card-title" align="right">
+                                    {% if local==False %}
                                 <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 2</button>
+                                {%elif local==True %}
+                                <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">RESTART</button>
+                                  {% endif %}
                                 {% if result and stats %}
                                 <div class="row bg-light" style="padding-top: 20px; padding-bottom: 20px; margin-top: 10px;" align="center">
                                   <div class="col-3"><h3>TOT {{ result|length }}</h3></div>
@@ -261,15 +283,19 @@
                                           {% elif dicti["status"] == True and dicti["missing"] %}
                                           <i class="fas fa-question-circle text-warning fa-lg"></i> 
                                           {% endif %}
-                                        
+                                          {% if local == False %}
                                         <a href= {{ dicti["input"][0] }} target="_blank"> {{ dicti["input"][0] }}</a>    
-                                        
+                                        {% else %}
+                                        <a> {{ dicti["input"][0] }}</a>
+                                        {% endif %}
                                         <a data-toggle="modal" style="cursor:pointer;" data-target= {{ "#modal" + loop.index|string }}>
                                           <i class="fas fa-file-alt fa-lg"></i>
                                         </a>
+                                        {% if local == False %}
                                         <a href= {{ dicti["input"][0]|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
                                             <i class="fab fa-github fa-lg"></i>
-                                        </a></li>
+                                        </a>
+                                      {% endif %}</li>
   
 
 
@@ -334,13 +360,22 @@
                                 {% endfor %}
                               </ul>
                               {% endif %}
-                              {% if problem %}
+                              {% if probleminput==True %}
                               <div class="bg-danger text-light" style="padding: 5px">
                                 <h3>Error Input at:</h3>
+                                {% if local==False %}
                                 <a target="_blank" class="text-light" href= {{ problem }}>{{ problem }}</a>
                                 <a href= {{ problem|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
                                   <i class="fab fa-github fa-lg text-light"></i>
-                              </a></li>
+                              </a>
+                              {% elif local==True %}
+                              <a class="text-light">{{ problem }}</a>
+                              {% endif %}
+                              </div>
+
+                              {% elif problemdata==True %}
+                              <div class="bg-danger text-light" style="padding: 5px">
+                                  <h3>{{ problem }} cannot be executed:</h3><h5> Missing a CQ SPARQL ENDPOINT URL or wrong CQ TOYSET KEYWORD</h5>
                               </div>
                               {% endif %}
                             </div>
