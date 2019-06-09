@@ -1,0 +1,1 @@
+web: gunicorn allin1:app
