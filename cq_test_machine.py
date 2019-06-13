@@ -61,24 +61,12 @@ def json_comparer(query_result, expected_result):
                 lista.append(diz)
             return True, str(len(check_list)), lista
 
-def json_comparer_stronzo(query_result, expected_result):
-    result_list = [x for y in expected_result for x in query_result if x == y]
-    if len(result_list) == len(expected_result): #o è meglio mettere 10?? NOPI PERCHè MAGARI NON E' SEMPRE DIECI MA MENO
-        return True, None
-    else:
-        var = len(expected_result) - len(result_list)
-        if var == len(expected_result):
-            return False, None #Se ci sono zero matchs non riesce a fare la check_list perchè è vuota e quindi boh
-        else:
-            check_list = [m for m in expected_result if m not in result_list]  # or [n for n in result_list if n not in expected_result]
-            return True, check_list
 
-
-def final_function (toyset_string, query_string, expected_string, toysetkeyword, endpoint): #se cambio l'ordine degli input non funziona lul, forse se li seescapassimo e salvassimo in variabili diverse potremmo metterli come ci pare, così l'algoritmo è più robusto
-    if toysetkeyword and toysetkeyword in str(toyset_string):
-        return json_comparer(query_on_toyset(unescaper(query_string), unescaper(toyset_string)), json_cleaner(unescaper(expected_string)))
+def final_function (query_string, expected_string, toyset, endpoint): #se cambio l'ordine degli input non funziona lul, forse se li seescapassimo e salvassimo in variabili diverse potremmo metterli come ci pare, così l'algoritmo è più robusto
+    if toyset:
+        return json_comparer(query_on_toyset(unescaper(query_string), unescaper(toyset)), json_cleaner(unescaper(expected_string)))
     elif endpoint:
-        return json_comparer(query_on_data(unescaper(query_string), endpoint), json_cleaner(unescaper(expected_string)))
+        return json_comparer(query_on_data(unescaper(query_string), unescaper(endpoint)), json_cleaner(unescaper(expected_string)))
     else:
         return "nodata", None, None
 
@@ -139,7 +127,7 @@ def finder(url, filekeyword, parent):
         dict_test[parent] = None
     return dict_test
 
-def testaction (test, toysetkeyword, endpoint):
+def testaction (test):
 
         onto = get_ontology(test).load()
         ontolist = list()
@@ -147,14 +135,15 @@ def testaction (test, toysetkeyword, endpoint):
 
         expecteddata = list(onto.metadata.hasExpectedResult)[0]
         ontolist.append(expecteddata)
-
-        inputtestdata = list(onto.metadata.hasInputTestData)[0]
-        ontolist.append(inputtestdata)
-
+        #inputtestdata = list(onto.metadata.hasInputTestData)[0]
+        #ontolist.append(inputtestdata)
+        print("mercurio")
         querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
         ontolist.append(querydata)
-
-        status, missing, missinglist = final_function(inputtestdata, querydata, expecteddata, toysetkeyword, endpoint)
+        datatype = list(onto.metadata.hasInputTestData.hasInputTestDataCategory)[0]
+        datauri = list(onto.metadata.hasInputTestData.hasInputTestDataUri)[0]
+        print(datatype, datauri)
+        status, missing, missinglist = final_function(querydata, expecteddata, toyset, endpoint)
 
         if status == "nodata":
             return "nodata"

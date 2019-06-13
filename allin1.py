@@ -52,7 +52,7 @@ def test_finder ():
                 filename = secure_filename(filesreq.filename)
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 filesreq.save(filepath)
-                resulttest = testaction(filepath, toysetkeyword, endpoint)
+                resulttest = testaction(filepath)
                 if resulttest == "nodata":
                     os.remove(filepath)
                     if list_local:
@@ -84,15 +84,6 @@ def test_finder ():
 @app.route('/test', methods=['POST'])
 
 def test ():
-    try:
-        toysetkeyword = request.form['toysetkeyword']
-    except:
-        toysetkeyword = None
-
-    try:
-        endpoint = request.form['endpointurl']
-    except:
-        endpoint = None
     values = request.form.getlist('test')
 
     if values:
@@ -100,7 +91,7 @@ def test ():
         try:
             list_total = list()
             for test in values:
-                resulttest = testaction(test, toysetkeyword, endpoint)
+                resulttest = testaction(test)
                 if resulttest == "nodata":
                     if list_total:
                         end = time.time()
