@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="urn:absolute:blablablatestalod#"
-     xml:base="urn:absolute:blablablatestalod"
+<rdf:RDF xmlns="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#"
+     xml:base="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:testannotationschema="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#"
-     xmlns:blablablatestalod="urn:absolute:blablablatestalod#"
+     xmlns:blablablatestalod="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="urn:absolute:blablablatestalod">
+    <owl:Ontology rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl">
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl"/>
     </owl:Ontology>
     
@@ -25,15 +25,15 @@
     
 
 
-    <!-- urn:absolute:blablablatestalod#hasInputTestDataCategory -->
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataCategory -->
 
-    <owl:AnnotationProperty rdf:about="urn:absolute:blablablatestalod#hasInputTestDataCategory"/>
+    <owl:AnnotationProperty rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataCategory"/>
     
 
 
-    <!-- urn:absolute:blablablatestalod#hasInputTestDataUri -->
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataUri -->
 
-    <owl:AnnotationProperty rdf:about="urn:absolute:blablablatestalod#hasInputTestDataUri"/>
+    <owl:AnnotationProperty rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataUri"/>
     
 
 
@@ -48,15 +48,15 @@
     
 
 
-    <!-- urn:absolute:blablablatestalod#SPARQLendpoint -->
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint -->
 
-    <owl:NamedIndividual rdf:about="urn:absolute:blablablatestalod#SPARQLendpoint"/>
+    <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint"/>
     
 
 
-    <!-- urn:absolute:blablablatestalod#ToyDataset -->
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#ToyDataset -->
 
-    <owl:NamedIndividual rdf:about="urn:absolute:blablablatestalod#ToyDataset"/>
+    <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#ToyDataset"/>
 </rdf:RDF>
 
 
