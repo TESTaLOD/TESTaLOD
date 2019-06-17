@@ -116,7 +116,9 @@
                                             
                                         </div>
                                         </div>
+                                        <div id="buttonholder">
                                         <button id="fire1" type="submit" class="btn btn-primary">GO!</button>
+                                      </div>
                                       </form>
                             </div>
                           </div>
@@ -164,7 +166,7 @@
                                                     <form id="files" action= "/test"  method="POST">
                                                         <div class="card-title">
                                                             <!--data-toggle="modal" data-target="#load"-->
-                                                            <button id="fire2" type="submit" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                                            <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
                                                     </div>
 
                                                   {% if data %}
@@ -202,7 +204,7 @@
                                             {{ listing(data, None) }}
                                             {% if data|length > 20 %}
                                             <div class="card-title">
-                                              <button id="fire3" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                              <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
                                             </div>
                                             {% endif %}
                                             {% endif %}

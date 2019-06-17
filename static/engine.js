@@ -56,12 +56,16 @@
         $('input[type=radio][name=input-path]').change(function() {
             switch ($(this).val()) {
                 case 'url':
+                        $("#buttonholder").html("")
+                        $("#buttonholder").html('<button id="fire1" type="submit" class="btn btn-primary">GO!</button>')
                         $("#holder").html("")
                         $("#holder").html('<input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/ICCD-MiBACT/ArCo/tree/master/ArCo-release/test/CQ" required>')
                         $("#keywordlabelholder").html('<div class="custom-control custom-checkbox" style="margin-top:20px"> <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue" onchange="keycheck(this)"> <label class="custom-control-label" for="keytrue">CQ FILTER</label> </div> <div id="keyword-holder"> </div> <small id="emailHelp" class="form-text text-muted">Retrieve all files having FILTER from selected path</small> <div class="custom-control custom-checkbox" style="margin-top:20px"> <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> <label class="custom-control-label" for="subfo">Retrieve also SubFolders</label> </div>')
                         $("#step2").show()
                     break
                 case 'local':
+                    $("#buttonholder").html("")
+                    $("#buttonholder").html('<button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>')
                     $("#keywordlabelholder").html("")
                     $("#holder").html("")
                     $("#holder").html('<div class="custom-file" style="height:100% !important"> <input type="file" class="custom-file-input" id="customFile" name="localfile" accept=".owl" multiple required onchange="updateList()"> <label class="custom-file-label" for="customFile">Choose files</label> <div id="fileList"></div> </div>')
