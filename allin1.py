@@ -21,6 +21,10 @@ def test_finder ():
         filekeyword = request.form['filekeyword']
     except:
         filekeyword = None
+    try:
+        subfolder = request.form['subfo']
+    except:
+        subfolder = None
 
     try:
         githubfolderurl = request.form['url']
@@ -29,7 +33,11 @@ def test_finder ():
         except:
             return render_template('index.html',local=False, wronguri=True, active='1')
         try:
-            test_list = finder(url, filekeyword, githubfolderurl)
+            if subfolder:
+                test_list = subfinder(url, filekeyword, githubfolderurl)
+            else:
+                test_list = finder(url, filekeyword, githubfolderurl)
+
         except:
             return render_template('index.html',local=False, emptyfolder=True, active='1')
         ntot = len(test_list)
@@ -52,7 +60,7 @@ def test_finder ():
                         stats = statmaker(list_local, timetot)
                     else:
                         stats = None
-                    return render_template('index.html', problemdata= True, problem= filepath, result=list_local, stats=stats, active='3', local=True)
+                    return render_template('index.html', problem= filepath, result=list_local, stats=stats, active='3', local=True)
                 else:
                     list_local.append(resulttest)
                 os.remove(filepath)
@@ -90,7 +98,7 @@ def test ():
                         stats = statmaker(list_total, timetot)
                     else:
                         stats = None
-                    return render_template('index.html', problem=test, problemdata=True, result=list_total, stats=stats, active='3', local=False)
+                    return render_template('index.html', problem=test, result=list_total, stats=stats, active='3', local=False)
                 elif resulttest:
                     list_total.append(resulttest)
             end = time.time()

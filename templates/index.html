@@ -103,10 +103,14 @@
                                             <div id="keywordlabelholder">
                                             <div class="custom-control custom-checkbox" style="margin-top:20px">
                                               <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue"  onchange="keycheck(this)">
-                                              <label class="custom-control-label" for="keytrue">CQ FILE KEYWORD</label>
+                                              <label class="custom-control-label" for="keytrue">CQ FILTER</label>
                                             </div>
                                             <div id="keyword-holder"> </div>
-                                          <small id="emailHelp" class="form-text text-muted">Retrieve all files having KEYWORD from this path</small>
+                                          <small id="emailHelp" class="form-text text-muted">Retrieve all files having FILTER from selected path</small>
+                                          <div class="custom-control custom-checkbox" style="margin-top:20px">
+                                              <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> 
+                                              <label class="custom-control-label"  for="subfo">Retrieve also SubFolders</label>
+                                            </div>
                                         </div>
                                         <div class="form-group" id="local-para">
                                             
@@ -158,26 +162,6 @@
                                                             </div>
                                                             {% endif %}
                                                     <form id="files" action= "/test"  method="POST">
-                                                        <div class="form-group">
-                                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
-                                                                <input oninvalid="this.setCustomValidity('Please select at least CQ TOYSET KEYWORD or CQ SPARQL ENDPOINT URL')" oninput="setCustomValidity('')" type="checkbox" class="parameter custom-control-input" id="toysetcheck" name="toysetcheck"  onchange="toysetcheckact(this)" required>
-                                                                <label class="custom-control-label" for="toysetcheck">CQ TOYSET KEYWORD</label>
-                                                              </div>
-                                                              <div id="toysetkeyword-holder"> </div>
-
-                                                      
-                                                          <small id="emailHelp" class="form-text text-muted">If some toy-dataset-files are used as InputTestData they will be traced trough TOYSET-KEYWORD</small>
-
-                                                            <div class="custom-control custom-checkbox" style="margin-top:20px">
-                                                                <input type="checkbox" class="parameter custom-control-input" id="endpointcheck" name="endpointcheck"  onchange="endpointcheckact(this)" required>
-                                                                <label class="custom-control-label" for="endpointcheck">CQ SPARQL ENDPOINT URL</label>
-                                                              </div>
-                                                              <div id="endpointcheck-holder"> </div>
-
-                                                      
-                                                          <small id="emailHelp" class="form-text text-muted">CQ will be executed on selected SPARQL ENDPOINT</small>
-                                                        </div>
-
                                                         <div class="card-title">
                                                             <!--data-toggle="modal" data-target="#load"-->
                                                             <button id="fire2" type="submit" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
@@ -276,11 +260,11 @@
                                 {% for dicti in result %}
                                       <li style="list-style-type: none; margin-bottom:10px">
                                                                           
-                                          {% if dicti["status"] == True and not dicti["missing"] %}
+                                          {% if dicti["status"] == True and not dicti["missingnumber"] %}
                                           <i class="fas fa-check-circle text-success fa-lg"></i> 
                                           {% elif dicti["status"] == False %}
                                           <i class="fas fa-times-circle text-danger fa-lg"></i> 
-                                          {% elif dicti["status"] == True and dicti["missing"] %}
+                                          {% elif dicti["status"] == True and dicti["missingnumber"] %}
                                           <i class="fas fa-question-circle text-warning fa-lg"></i> 
                                           {% endif %}
                                           {% if local == False %}
@@ -311,13 +295,18 @@
                                               </div>
                                               <div class="modal-body">
                                                 
-                                                    {% if dicti["status"] == True and not dicti["missing"] %}
+                                                    {% if dicti["status"] == True and not dicti["missingnumber"] %}
                                                     <div class="alert alert-success" style="margin: 20px">
                                                         <b>All Matched</b>
                                                     </div>
                                                     <ul>
                                                         <li style="margin-bottom: 10px">
-                                                            <b>HasExpectedResult: </b>{{ dicti["input"][1] }}
+                                                            <b>HasExpectedResult: </b>
+                                                          <ul style="list-style-type: none;">
+                                                            {% for elem in dicti["matched"] %}
+                                                            <li class="alert alert-success">{{ elem.content }}</li>
+                                                            {% endfor %}
+                                                          </ul>
                                                         </li>
                                                     {% elif dicti["status"] == False %}
                                                     <div class="alert alert-danger" style="margin: 20px">
@@ -325,9 +314,14 @@
                                                     </div>
                                                     <ul>
                                                         <li style="margin-bottom: 10px">
-                                                            <b>HasExpectedResult: </b>{{ dicti["input"][1] }}
+                                                            <b>HasExpectedResult: </b>
+                                                          <ul style="list-style-type: none;">
+                                                            {% for elem in dicti["matched"] %}
+                                                            <li class="alert alert-danger">{{ elem.content }}</li>
+                                                            {% endfor %}
+                                                          </ul>
                                                         </li>
-                                                  {% elif dicti["status"] == True and dicti["missing"] %}
+                                                  {% elif dicti["status"] == True and dicti["missingnumber"] %}
                                                     <div class="alert alert-warning" style="margin: 20px">
                                                         <b>Missing {{ dicti["missingnumber"]|int }} element{% if dicti["missingnumber"]|int > 1 %}s{% endif %}: </b>
                                                       </div>
@@ -335,7 +329,7 @@
                                                         <li style="margin-bottom: 10px">
                                                         <b>HasExpectedResult: </b>
                                                         <ul style="list-style-type: none;">
-                                                        {% for elem in dicti["missing"] %}
+                                                        {% for elem in dicti["matched"] %}
                                                         {% if elem.color == "Green" %}
                                                         <li class="alert alert-success">{{ elem.content }}</li>
                                                         {% elif elem.color == "Red" %}
@@ -347,10 +341,13 @@
                                                     {% endif %}
                                                     
                                                   <li style="margin-bottom: 10px">
-                                                      <b>HasInputTestData: </b> <a href= {{ dicti["input"][2] }} target="_blank">{{ dicti["input"][2] }}</a>
+                                                      <b>HasInputTestDataCategory: </b>{{ dicti["input"][2] }}</a>
                                                   </li>
                                                   <li style="margin-bottom: 10px">
-                                                      <b>HasSPARQLQueryUnitTest:</b>{{ dicti["input"][3] }}
+                                                    <b>HasInputTestDataUri: </b> <a href= {{ dicti["input"][3] }} target="_blank">{{ dicti["input"][3] }}</a>
+                                                </li>
+                                                  <li style="margin-bottom: 10px">
+                                                      <b>HasSPARQLQueryUnitTest:</b>{{ dicti["input"][4] }}
                                                   </li>
                                                 </ul>
                                               </div>
@@ -371,11 +368,6 @@
                               {% elif local==True %}
                               <a class="text-light">{{ problem }}</a>
                               {% endif %}
-                              </div>
-
-                              {% elif problemdata==True %}
-                              <div class="bg-danger text-light" style="padding: 5px">
-                                  <h3>{{ problem }} cannot be executed:</h3><h5> Missing a CQ SPARQL ENDPOINT URL or wrong CQ TOYSET KEYWORD</h5>
                               </div>
                               {% endif %}
                             </div>
