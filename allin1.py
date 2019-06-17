@@ -36,15 +36,6 @@ def test_finder ():
         return render_template('index.html', data=test_list, leng=ntot, active='2', local=False)
     except:
         try:
-            try:
-                toysetkeyword = request.form['toysetkeyword']
-            except:
-                toysetkeyword = None
-
-            try:
-                endpoint = request.form['endpointurl']
-            except:
-                endpoint = None
             req_list = request.files.getlist('localfile')
             start = time.time()
             list_local = list()

@@ -135,16 +135,21 @@ def testaction (test):
 
         expecteddata = list(onto.metadata.hasExpectedResult)[0]
         ontolist.append(expecteddata)
-        #inputtestdata = list(onto.metadata.hasInputTestData)[0]
-        #ontolist.append(inputtestdata)
-        print("mercurio")
+
         querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
         ontolist.append(querydata)
-        datatype = list(onto.metadata.hasInputTestData.hasInputTestDataCategory)[0]
-        datauri = list(onto.metadata.hasInputTestData.hasInputTestDataUri)[0]
-        print(datatype, datauri)
-        status, missing, missinglist = final_function(querydata, expecteddata, toyset, endpoint)
 
+        datatype = list(onto.metadata.hasInputTestDataCategory)[0]
+        ontolist.append(datatype)
+
+        datauri = list(onto.metadata.hasInputTestDataUri)[0]
+        ontolist.append(datauri)
+
+        #testalod = Namespace("https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#")
+        if str(datatype).split('.')[1] == "ToyDataset":
+            status, missing, missinglist = final_function(querydata, expecteddata, datauri, None)
+        elif str(datatype).split('.')[1] == "SPARQLendpoint":
+            status, missing, missinglist = final_function(querydata, expecteddata, None, datauri)
         if status == "nodata":
             return "nodata"
         else:
