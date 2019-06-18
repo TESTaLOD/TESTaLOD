@@ -1,7 +1,10 @@
 <html>
 <head>
         <meta name="viewport" content="width=device-width">
-        <title>TESTALO</title>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <title>TESTaLOD</title>
         <!--Bootstrap-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -52,7 +55,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="padding: 1rem">
         <h1 class="navbar-brand">
-          TESTALO
+          TESTaLOD
         </h1>
             </nav>
 
@@ -111,9 +114,6 @@
                                               <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> 
                                               <label class="custom-control-label"  for="subfo">Retrieve also SubFolders</label>
                                             </div>
-                                        </div>
-                                        <div class="form-group" id="local-para">
-                                            
                                         </div>
                                         </div>
                                         <div id="buttonholder">
@@ -174,11 +174,11 @@
                                             {% for key,value in input.items() if value is not none %}
                                             <details open class="liststep2">
                                               {% if newkey  %}
-                                              <summary><b>{{ key.split('master')[1]|replace(newkey.split('master')[1], "") }}</b></a> 
+                                              <summary style="display: inline-block"><b>{{ key.split('master')[1]|replace(newkey.split('master')[1], "") }}</b>
                                               {% elif "master" in key %}
-                                              <summary><b>{{ key.split('master')[1] }}</b></a> 
+                                              <summary style="display: inline-block"><b>{{ key.split('master')[1] }}</b>
                                               {% else %}
-                                              <summary><b>{{ key }}</b></a> 
+                                              <summary style="display: inline-block"><b>{{ key }}</b>
                                                 {% endif %}
                                               
                                               </summary>
@@ -202,11 +202,9 @@
                                             {% endfor %}
                                             {% endmacro %}
                                             {{ listing(data, None) }}
-                                            {% if data|length > 20 %}
                                             <div class="card-title">
-                                              <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
+                                              <button id="fire2bis" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
                                             </div>
-                                            {% endif %}
                                             {% endif %}
                                             </form>   
                                             </div>

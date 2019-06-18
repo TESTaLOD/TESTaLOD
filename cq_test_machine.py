@@ -166,7 +166,6 @@ def testaction (test):
 
         querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
         ontolist.append(querydata)
-
         #testalod = Namespace("https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#")
         if str(datatype).split('.')[1] == "ToyDataset":
             status, missing, matchedlist = final_function(querydata, expecteddata, datauri, None)

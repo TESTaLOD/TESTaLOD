@@ -111,6 +111,13 @@ def test ():
         return render_template('index.html', result=list_total, stats= stats, active='3', local= False)
 
 
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, public, max-age=0"
+    response.headers["Expires"] = 0
+    response.headers["Pragma"] = "no-cache"
+    return response
+
 if __name__ == '__main__':
   app.run (host='0.0.0.0')
 
