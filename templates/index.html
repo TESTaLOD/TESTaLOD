@@ -261,7 +261,20 @@
                                 <ul>
                                 {% for dicti in result %}
                                       <li style="list-style-type: none; margin-bottom:10px">
-                                                                          
+                                          {% if dicti["status"] == "errorinput" %}
+                                          <div class="bg-danger text-light" style="padding: 5px">
+                                              <h3>Error Input at:</h3>
+                                              {% if local==False %}
+                                              <a target="_blank" class="text-light" href= {{ dicti["input"] }}>{{ dicti["input"] }}</a>
+                                              <a href= {{ dicti["input"]|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
+                                                <i class="fab fa-github fa-lg text-light"></i>
+                                            </a>
+                                            {% elif local==True %}
+                                            <a class="text-light">{{ dicti["input"] }}</a>
+                                            {% endif %}
+                                            </div>
+                                        </li>
+                                        {% else %}
                                           {% if dicti["status"] == True and not dicti["missingnumber"] %}
                                           <i class="fas fa-check-circle text-success fa-lg"></i> 
                                           {% elif dicti["status"] == False %}
@@ -356,22 +369,11 @@
                                             </div>
                                           </div>
                                         </div>
+                                        {% endif %}
                                 {% endfor %}
                               </ul>
                               {% endif %}
-                              {% if probleminput==True %}
-                              <div class="bg-danger text-light" style="padding: 5px">
-                                <h3>Error Input at:</h3>
-                                {% if local==False %}
-                                <a target="_blank" class="text-light" href= {{ problem }}>{{ problem }}</a>
-                                <a href= {{ problem|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
-                                  <i class="fab fa-github fa-lg text-light"></i>
-                              </a>
-                              {% elif local==True %}
-                              <a class="text-light">{{ problem }}</a>
-                              {% endif %}
-                              </div>
-                              {% endif %}
+  
                             </div>
                           </div>
                         </div>
@@ -393,7 +395,7 @@
               {% endif %}
 
 
-
+ù
 
           <!--FOOTER-->
             <footer class="footer bg-dark text-white" style="margin-bottom: 0px; padding: 20px">

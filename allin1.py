@@ -43,40 +43,38 @@ def test_finder ():
         ntot = len(test_list)
         return render_template('index.html', data=test_list, leng=ntot, active='2', local=False)
     except:
-        try:
-            req_list = request.files.getlist('localfile')
-            start = time.time()
-            list_local = list()
-            for filesreq in req_list:
+        req_list = request.files.getlist('localfile')
+        start = time.time()
+        list_local = list()
+        for filesreq in req_list:
+            try:
                 filename = secure_filename(filesreq.filename)
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 filesreq.save(filepath)
                 resulttest = testaction(filepath)
                 if resulttest == "nodata":
                     os.remove(filepath)
-                    if list_local:
-                        end = time.time()
-                        timetot = round(end - start, 2)
-                        stats = statmaker(list_local, timetot)
-                    else:
-                        stats = None
-                    return render_template('index.html', problem= filepath, result=list_local, stats=stats, active='3', local=True)
+                    resultdict = dict()
+                    resultdict["input"] = filename
+                    resultdict["status"] = "errorinput"
+                    resultdict["matched"] = None
+                    resultdict["missingnumber"] = None
+                    list_local.append(resultdict)
                 else:
                     list_local.append(resulttest)
                 os.remove(filepath)
-            end = time.time()
-            timetot = round(end - start, 2)
-            stats = statmaker(list_local, timetot)
-            return render_template('index.html', result=list_local, stats=stats, active='3', local=True)
-        except:
-            os.remove(filepath)
-            if list_local:
-                end = time.time()
-                timetot = round(end - start, 2)
-                stats = statmaker(list_local, timetot)
-            else:
-                stats = None
-            return render_template('index.html',probleminput= True, problem=filename, stats=stats, result=list_local, active='3', local=True)
+            except:
+                os.remove(filepath)
+                resultdict = dict()
+                resultdict["input"] = filename
+                resultdict["status"] = "errorinput"
+                resultdict["matched"] = None
+                resultdict["missingnumber"] = None
+                list_local.append(resultdict)
+        end = time.time()
+        timetot = round(end - start, 2)
+        stats = statmaker(list_local, timetot)
+        return render_template('index.html', result=list_local, stats=stats, active='3', local=True)
 
 
 
@@ -87,32 +85,31 @@ def test ():
 
     if values:
         start = time.time()
-        try:
-            list_total = list()
-            for test in values:
+        list_total = list()
+        for test in values:
+            try:
                 resulttest = testaction(test)
                 if resulttest == "nodata":
-                    if list_total:
-                        end = time.time()
-                        timetot = round(end - start, 2)
-                        stats = statmaker(list_total, timetot)
-                    else:
-                        stats = None
-                    return render_template('index.html', problem=test, result=list_total, stats=stats, active='3', local=False)
+                    resultdict = dict()
+                    resultdict["input"] = test
+                    resultdict["status"] = "errorinput"
+                    resultdict["matched"] = None
+                    resultdict["missingnumber"] = None
+                    list_total.append(resultdict)
                 elif resulttest:
                     list_total.append(resulttest)
-            end = time.time()
-            timetot = round(end - start, 2)
-            stats = statmaker(list_total, timetot)
-            return render_template('index.html', result=list_total, stats= stats, active='3', local= False)
-        except:
-            if list_total:
-                end = time.time()
-                timetot = round(end - start,2)
-                stats = statmaker(list_total, timetot)
-            else:
-                stats = None
-            return render_template('index.html',probleminput= True, problem= test, local= False, stats= stats, result=list_total, active='3')
+            except:
+                resultdict = dict()
+                resultdict["input"] = test
+                resultdict["status"] = "errorinput"
+                resultdict["matched"] = None
+                resultdict["missingnumber"] = None
+                list_total.append(resultdict)
+        end = time.time()
+        timetot = round(end - start, 2)
+        stats = statmaker(list_total, timetot)
+        return render_template('index.html', result=list_total, stats= stats, active='3', local= False)
+
 
 if __name__ == '__main__':
   app.run (host='0.0.0.0')
