@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://w3id.org/arco/test/CQ/testcase_enpoint_03.owl#"
+     xml:base="https://w3id.org/arco/test/CQ/testcase_enpoint_03.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:testalod="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#"
+     xmlns:testannotationschema="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://w3id.org/arco/test/CQ/testcase_enpoint_03.owl">
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl"/>
+        <owl:imports rdf:resource="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl"/>
+        <testannotationschema:testDate>2019-06-18</testannotationschema:testDate>
+        <testannotationschema:hasCQ xml:lang="it">In quale posizione (es.: frontespizio, copertina, etc.) di una specifica pubblicazione è stata riprodotta la stampa X?</testannotationschema:hasCQ>
+        <testalod:hasInputTestDataUri rdf:resource="http://wit.istc.cnr.it/arco/virtuoso/sparql"/>
+        <testannotationschema:hasSPARQLQueryUnitTest xml:lang="en">PREFIX arco-cd: &lt;https://w3id.org/arco/context-description/&gt;
+SELECT ?title ?reproduction ?position
+WHERE {?publication arco-cd:hasTitle ?pubtitle .
+?pubtitle rdfs:label ?title .
+?publication arco-cd:hasReproduction ?reproduction .
+?reproduction arco-cd:hasReproductionPosition ?position }</testannotationschema:hasSPARQLQueryUnitTest>
+        <testannotationschema:hasExpectedResult xml:lang="it">{ &quot;head&quot;: { &quot;link&quot;: [], &quot;vars&quot;: [&quot;title&quot;, &quot;reproduction&quot;, &quot;position&quot;] },
+  &quot;results&quot;: { &quot;distinct&quot;: false, &quot;ordered&quot;: true, &quot;bindings&quot;: [
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;tavole geografiche delli due regni di napoli e sicilia&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500316901-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500316901-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;tipi militari dei differenti corpi che compongono il reale esercito e l&apos;armata di mare di s.m. il re del regno delle due sicilie&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500318418-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500318418-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;atlante corografico storico e statistico del regno delle due sicilie&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500316824-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500316824-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;raccolta delle principali vedute di napoli e suoi dintorni&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500316959-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500316959-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;collezione degli uniformi del reale esercito di s.m. il re del regno delledue sicilie&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500318318-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500318318-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;tipi militari dei differenti corpi che compongono il reale esercito e l&apos;armata di mare di s.m. il re del regno delle due sicilie&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500318468-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500318468-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;il palazzo s. giacomo album degli 80 al municipio di napoli 1876 e 1877&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500318632-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500318632-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;solatium lionne album caricature&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500318768-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500318768-copertina&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;prima parte di architetture e prospettive inventate ed incise da giambatti sta piranesi architetto veneziano fra gli arcadi salcindio tiseio&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500310041-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500310041-frontespizio&quot; }},
+    { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;vasi candelabri cippi sarcophagi tripodi lucerne ed ornamenti antichi dise gnati ed incisi dal cav. gio. batta. piranesi&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500310077-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500310077-frontespizio&quot; }} ] } }</testannotationschema:hasExpectedResult>
+        <testannotationschema:testedBy xml:lang="en">Run by Valentina Pasqual and Fabio Mariani</testannotationschema:testedBy>
+        <testalod:hasInputTestDataCategory rdf:resource="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint"/>
+        <rdfs:comment xml:lang="en">TESTaLOD example</rdfs:comment>
+    </owl:Ontology>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
