@@ -92,8 +92,8 @@ def statmaker (listot, time):
 
 def API_url(githubfolderurl):
     githubfolderurl = githubfolderurl.split("//")[1]
-    if ("master" in githubfolderurl):
-        githubfolderurl = githubfolderurl.split("master/")
+    if ("/tree/master/" in githubfolderurl):
+        githubfolderurl = githubfolderurl.split("master/", 1)
         path1 = githubfolderurl[0].split("/")
         filepath = githubfolderurl[1]
         user = path1[1]

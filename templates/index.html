@@ -171,9 +171,9 @@
                                             {% for key,value in input.items() if value is not none %}
                                             <details open class="liststep2">
                                               {% if newkey  %}
-                                              <summary style="display: inline-block"><b>{{ key.split('master')[1]|replace(newkey.split('master')[1], "") }}</b>
+                                              <summary style="display: inline-block"><b>{{ key.split('master', 1)[1]|replace(newkey.split('master', 1)[1], "") }}</b>
                                               {% elif "master" in key %}
-                                              <summary style="display: inline-block"><b>{{ key.split('master')[1] }}</b>
+                                              <summary style="display: inline-block"><b>{{ key.split('master', 1)[1] }}</b>
                                               {% else %}
                                               <summary style="display: inline-block"><b>{{ key }}</b>
                                                 {% endif %}
@@ -189,7 +189,7 @@
                                                 <input class="custom-control-input" type="checkbox" name="test" checked value= {{ item }} id= {{ item }} required>
                                                 <label class="custom-control-label"  for= {{ item }}>
                                                     {% set keyrep = key|string %}
-                                                    <a href= {{ item }} target="_blank"> {{ item.split('master')[1]|replace(key.split('master')[1], "") }}</a>  </label>
+                                                    <a href= {{ item }} target="_blank"> {{ item.split('master', 1)[1]|replace(key.split('master')[1], "", 1) }}</a>  </label>
                                               </div>
                                             </li>
                                             {% endif %}
@@ -261,7 +261,7 @@
                                               <h3>Error Input at:</h3>
                                               {% if local==False %}
                                               <a target="_blank" class="text-light" href= {{ dicti["input"] }}>{{ dicti["input"] }}</a>
-                                              <a href= {{ dicti["input"]|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
+                                              <a href= {{ dicti["input"]|replace('master', 'blob/master', 1)|replace('raw.githubusercontent.com', 'github.com', 1) }} target="_blank">
                                                 <i class="fab fa-github fa-lg text-light"></i>
                                             </a>
                                             {% elif local==True %}
@@ -286,7 +286,7 @@
                                           <i class="fas fa-file-alt fa-lg"></i>
                                         </a>
                                         {% if local == False %}
-                                        <a href= {{ dicti["input"][0]|replace('master', 'blob/master')|replace('raw.githubusercontent.com', 'github.com') }} target="_blank">
+                                        <a href= {{ dicti["input"][0]|replace('master', 'blob/master', 1)|replace('raw.githubusercontent.com', 'github.com', 1) }} target="_blank">
                                             <i class="fab fa-github fa-lg"></i>
                                         </a>
                                       {% endif %}</li>
