@@ -12,6 +12,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/file-uploader/5.16.2/all.fine-uploader/all.fine-uploader.js"></script>
         <style>
 
+        .btnnot{
+          Cursor:text !important; Text-Decoration: None !important; 
+          pointer-events: none !important;
+
+        }
         .loader {
           margin: auto;
           border: 16px solid #f3f3f3;
@@ -72,12 +77,12 @@
                           <div class="card-header" id="headingOne">
                             <h5 class="mb-0">
                                 {% if active=="1" %}
-                                <button class="btn btn-link" id="step1btn" type="button" data-toggle="collapse" data-target="#step1" aria-expanded="true" aria-controls="collapseOne">
+                                 <button class="btn  btnnot btn-link" id="step1btn" type="button"  data-target="#step1" aria-expanded="true" aria-controls="collapseOne">
                                     STEP #1
                                   </button>
                                 
                                 {% else %}
-                                <button class="btn btn-link" id="step1btn" type="button" data-toggle="collapse" data-target="#step1" aria-expanded="true" aria-controls="collapseOne" disabled>
+                                 <button class="btn  btnnot btn-link" id="step1btn" type="button"  data-target="#step1" aria-expanded="true" aria-controls="collapseOne" disabled>
                                     STEP #1
                                   </button>
                                 
@@ -130,12 +135,12 @@
                           <div class="card-header" id="headingTwo">
                             <h5 class="mb-0">
                                 {% if active=="2" %}
-                                <button class="btn btn-link" id="step2btn" type="button" data-toggle="collapse" data-target="#step2" aria-expanded="true" aria-controls="collapseTwo">
+                                 <button class="btn  btnnot btn-link" id="step2btn" type="button"  data-target="#step2" aria-expanded="true" aria-controls="collapseTwo">
                                     STEP #2
                                   </button>
                                 
                                 {% else %}
-                                <button class="btn btn-link" id="step2btn" type="button" data-toggle="collapse" data-target="#step2" aria-expanded="true" aria-controls="collapseTwo" disabled>
+                                 <button class="btn  btnnot btn-link" id="step2btn" type="button"  data-target="#step2" aria-expanded="true" aria-controls="collapseTwo" disabled>
                                     STEP #2
                                   </button>
                                 
@@ -146,7 +151,7 @@
                             <div class="card-body">
                                     <div style ="padding: 5px">
                                         <div align="right">
-                                            <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 1</button>
+                                            <a class="btn btn-secondary" type="button" href="{{ url_for('index') }}">GO BACK TO STEP 1</a>
                                             </div>
 
                                                      
@@ -220,12 +225,12 @@
                           <div class="card-header" id="headingThree">
                             <h5 class="mb-0">
                                 {% if active=="3" %}
-                                <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree">
+                                 <button class="btn  btnnot btn-link" id="step3btn" type="button"  data-target="#step3" aria-expanded="true" aria-controls="collapseThree">
                                     RESULTS
                                   </button>
                                 
                                 {% else %}
-                                <button class="btn btn-link" id="step3btn" type="button" data-toggle="collapse" data-target="#step3" aria-expanded="true" aria-controls="collapseThree" disabled>
+                                 <button class="btn  btnnot btn-link" id="step3btn" type="button"  data-target="#step3" aria-expanded="true" aria-controls="collapseThree" disabled>
                                     RESULTS
                                   </button>
                                 
@@ -235,11 +240,8 @@
                           <div id="step3" class="collapse {% if active=='3' %}show{%endif %}" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="card-title" align="right">
-                                    {% if local==False %}
-                                <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">GO BACK TO STEP 2</button>
-                                {%elif local==True %}
-                                <button class="btn btn-secondary" type="button" onClick="javascript:history.go(-1)">RESTART</button>
-                                  {% endif %}
+                                <a class="btn btn-secondary" type="button"  href="{{ url_for('index') }}">RESTART</a>
+ 
                                 {% if result and stats %}
                                 <div class="row bg-light" style="padding-top: 20px; padding-bottom: 20px; margin-top: 10px;" align="center">
                                   <div class="col-3"><h3>TOT {{ result|length }}</h3></div>
