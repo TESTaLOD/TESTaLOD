@@ -12,7 +12,7 @@ def unescaper(string):
 
 # ************************************************************************
 
-def json_cleaner(json_data):   # E' LA STESSA FUNZIONE DI DILLA'
+def json_cleaner(json_data):   
     json_dict = json.loads(json_data)
     elements = json_dict.get("results")
     elements = elements.get("bindings")
@@ -63,7 +63,7 @@ def json_comparer(query_result, expected_result):
             return True, str(len(check_list)), lista
 
 
-def final_function (query_string, expected_string, toyset, endpoint): #se cambio l'ordine degli input non funziona lul, forse se li seescapassimo e salvassimo in variabili diverse potremmo metterli come ci pare, così l'algoritmo è più robusto
+def final_function (query_string, expected_string, toyset, endpoint): 
     if toyset:
         return json_comparer(query_on_toyset(unescaper(query_string), unescaper(toyset)), json_cleaner(unescaper(expected_string)))
     elif endpoint:
