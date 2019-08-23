@@ -21,6 +21,12 @@
             var len = $("input[name=test]:checked").length;
             $("input[name=sel]").prop('checked', false);
             if(len>0){$("#counter").text(+len);}else{$("#counter").text('0');}
+            if (len == 1){
+                $("#plural").html("")
+            }
+            else{
+              $("#plural").html("s")
+            }
         });
         function ccchange(checkboxElem) {
         if (checkboxElem.checked == true) {
@@ -29,6 +35,7 @@
                           input.prop('checked', true);
                           var len = $("input[name=test]:checked").length;
                           $("#counter").text(len)
+                          $("#plural").html("s")
                   });
         }
         else{
@@ -36,9 +43,12 @@
                           var input = $(this);
                           input.prop('checked', false);
                           $("#counter").text('0')
+                          $("#plural").html("s")
                   });
         }
         }
+
+
 
         function keycheck(checkboxElem) {
         if (checkboxElem.checked == true) {
