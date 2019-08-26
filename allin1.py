@@ -111,6 +111,11 @@ def test ():
         return render_template('index.html', result=list_total, stats= stats, active='3', local= False)
 
 
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
+
+
 @app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, public, max-age=0"
