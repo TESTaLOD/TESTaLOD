@@ -345,9 +345,15 @@
                                               </div>
                                               <div class="modal-body">
                                                 
-                                                    {% if dicti["status"] == True and not dicti["missingnumber"] %}
+                                                    
                                                     <div style="margin: 20px">
+                                                        {% if dicti["status"] == True and not dicti["missingnumber"] %}
                                                         <b class="alert alert-success">All Matched</b>
+                                                        {% elif dicti["status"] == False %}
+                                                        <b class="alert alert-danger">None Matched</b>
+                                                        {% elif dicti["status"] == True and dicti["missingnumber"] %}
+                                                        <b class="alert alert-warning">Missing {{ dicti["missingnumber"]|int }} element{% if dicti["missingnumber"]|int > 1 %}s{% endif %} </b>
+                                                        {% endif %}
                                                     </div>
                                                     <ul style="padding-right:40px">
                                                         <li style="margin-bottom: 10px">
@@ -362,44 +368,25 @@
                                                         <li style="margin-bottom: 10px">
                                                             <b>HasExpectedResult: </b>
                                                           <ul style="list-style-type: none;">
-                                                            {% for elem in dicti["matched"] %}
-                                                            <li class="alert alert-success">{{ elem.content }}</li>
-                                                            {% endfor %}
+                                                            {% if dicti["status"] == True and not dicti["missingnumber"] %}
+                                                                    {% for elem in dicti["matched"] %}
+                                                                    <li class="alert alert-success">{{ elem.content }}</li>
+                                                                    {% endfor %}
+                                                            {% elif dicti["status"] == False %}
+                                                                    {% for elem in dicti["matched"] %}
+                                                                    <li class="alert alert-danger">{{ elem.content }}</li>
+                                                                    {% endfor %}
+                                                            {% elif dicti["status"] == True and dicti["missingnumber"] %}
+                                                                    {% for elem in dicti["matched"] %}
+                                                                            {% if elem.color == "Green" %}
+                                                                                    <li class="alert alert-success">{{ elem.content }}</li>
+                                                                            {% elif elem.color == "Red" %}
+                                                                                    <li class="alert alert-danger">{{ elem.content }}</li>
+                                                                            {% endif %}
+                                                                    {% endfor %}
+                                                            {% endif %}
                                                           </ul>
-                                                        </li>
-                                                    {% elif dicti["status"] == False %}
-                                                    <div style="margin: 20px">
-                                                        <b class="alert alert-danger">None Matched</b>
-                                                    </div>
-                                                    <ul>
-                                                        <li style="margin-bottom: 10px">
-                                                            <b>HasExpectedResult: </b>
-                                                          <ul style="list-style-type: none;">
-                                                            {% for elem in dicti["matched"] %}
-                                                            <li class="alert alert-danger">{{ elem.content }}</li>
-                                                            {% endfor %}
-                                                          </ul>
-                                                        </li>
-                                                  {% elif dicti["status"] == True and dicti["missingnumber"] %}
-                                                    <div style="margin: 20px">
-                                                        <b class="alert alert-warning">Missing {{ dicti["missingnumber"]|int }} element{% if dicti["missingnumber"]|int > 1 %}s{% endif %} </b>
-                                                      </div>
-                                                        <ul>
-                                                        <li style="margin-bottom: 10px">
-                                                        <b>HasExpectedResult: </b>
-                                                        <ul style="list-style-type: none;">
-                                                        {% for elem in dicti["matched"] %}
-                                                        {% if elem.color == "Green" %}
-                                                        <li class="alert alert-success">{{ elem.content }}</li>
-                                                        {% elif elem.color == "Red" %}
-                                                        <li class="alert alert-danger">{{ elem.content }}</li>
-                                                        {% endif %}
-                                                        {% endfor %}
-                                                      </ul>
-                                                      </li>
-                                                    {% endif %}
-                                                    
-                                          
+                                                        </li>                                       
                                                 </ul>
                                               </div>
                                               <div class="modal-footer">
