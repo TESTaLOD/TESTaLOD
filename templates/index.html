@@ -349,7 +349,16 @@
                                                     <div style="margin: 20px">
                                                         <b class="alert alert-success">All Matched</b>
                                                     </div>
-                                                    <ul>
+                                                    <ul style="padding-right:40px">
+                                                        <li style="margin-bottom: 10px">
+                                                            <b>HasInputTestDataCategory: </b>{{ dicti["input"][2] }}</a>
+                                                        </li>
+                                                        <li style="margin-bottom: 10px">
+                                                          <b>HasInputTestDataUri: </b> <a href= {{ dicti["input"][3] }} target="_blank">{{ dicti["input"][3] }}</a>
+                                                      </li>
+                                                        <li style="margin-bottom: 10px">
+                                                            <b>HasSPARQLQueryUnitTest:</b><pre class="alert bg-light"style="margin-left:40px; margin-top: 10px"><code>{{ dicti["input"][4] }}</code></pre>
+                                                        </li>
                                                         <li style="margin-bottom: 10px">
                                                             <b>HasExpectedResult: </b>
                                                           <ul style="list-style-type: none;">
@@ -390,15 +399,7 @@
                                                       </li>
                                                     {% endif %}
                                                     
-                                                  <li style="margin-bottom: 10px">
-                                                      <b>HasInputTestDataCategory: </b>{{ dicti["input"][2] }}</a>
-                                                  </li>
-                                                  <li style="margin-bottom: 10px">
-                                                    <b>HasInputTestDataUri: </b> <a href= {{ dicti["input"][3] }} target="_blank">{{ dicti["input"][3] }}</a>
-                                                </li>
-                                                  <li style="margin-bottom: 10px">
-                                                      <b>HasSPARQLQueryUnitTest:</b><pre class="alert bg-light"style="margin-left:40px; margin-top: 10px"><code>{{ dicti["input"][4] }}</code></pre>
-                                                  </li>
+                                          
                                                 </ul>
                                               </div>
                                               <div class="modal-footer">
