@@ -67,14 +67,14 @@
             switch ($(this).val()) {
                 case 'url':
                         $("#holder").html("")
-                        $("#holder").html('<input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase" required>')
-                        $("#keywordlabelholder").html('<div class="custom-control custom-checkbox" style="margin-top:20px"> <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue" onchange="keycheck(this)"> <label class="custom-control-label" for="keytrue">CQ FILTER</label> </div> <div id="keyword-holder"> </div> <small id="emailHelp" class="form-text text-muted">Retrieve all files having FILTER from selected path</small> <div class="custom-control custom-checkbox" style="margin-top:20px"> <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> <label class="custom-control-label" for="subfo">Retrieve also SubFolders</label> </div>')
+                        $("#holder").html('<input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase" required> <small id="emailHelp" class="form-text text-muted">Load owl files from a Github folder (github folder url required)</small>')
+                        $("#keywordlabelholder").html('<div class="custom-control custom-checkbox" style="margin-top:20px"> <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue" onchange="keycheck(this)"> <label class="custom-control-label" for="keytrue">CQ FILTER</label> </div> <div id="keyword-holder"> </div> <small id="emailHelp" class="form-text text-muted">Filter Github folder\'s files by filename</small> <div class="custom-control custom-checkbox" style="margin-top:20px"> <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> <label class="custom-control-label" for="subfo">Load subfolders recursively</label> </div>')
                         $("#step2").show()
                     break
                 case 'local':
                     $("#keywordlabelholder").html("")
                     $("#holder").html("")
-                    $("#holder").html('<div class="custom-file" style="height:100% !important"> <input type="file" class="custom-file-input" id="customFile" name="localfile" accept=".owl" multiple required onchange="updateList()"> <label class="custom-file-label" for="customFile">Choose files</label> <div id="fileList"></div> </div>')
+                    $("#holder").html('<div class="custom-file" style="height:100% !important"> <input type="file" class="custom-file-input" id="customFile" name="localfile" accept=".owl" multiple required onchange="updateList()"> <label class="custom-file-label" for="customFile">Choose files</label> <div id="fileList"></div> </div><small id="emailHelp" class="form-text text-muted">Load owl files from your local filesystem (you can select one or more owl files)</small>')
                     $("#step2").hide()
                 break
         }

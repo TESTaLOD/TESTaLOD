@@ -90,8 +90,11 @@
     <div class="container-fluid" style="padding: 0px;">
         <div class ="row" style="width: 100%; margin: 0px;">
             <div class="col-md-1"> </div>
-            <div class="col-md-10 bg-secondary text-white" style="padding:15px; margin-top: 15px; margin-bottom: 15px; border-radius: .25rem;"> TestaLOD is a tool supporting knowledge graph testing. It is developed for supporting and automatising backward execution of unit tests modelled as competency questions implemented during a testing activity based on eXtremeDesign methodology. <br>
-               <div style="margin-top:15px">For more information on methodological approach, please read <b><a class="text-light" href="http://stlab.istc.cnr.it/documents/ufes-nemo-visit/ontology-testing.pdf"><u>this article</u></a></b>.</div></div>
+            <div class="col-md-10 bg-secondary text-white" style="padding:15px; margin-top: 15px; margin-bottom: 15px; border-radius: .25rem;"> 
+                TestaLOD is a tool supporting knowledge graph testing.<br>
+                It supports the automatisation of unit tests backward execution.<br>
+                Unit tests are usually modelled as competency questions e.g. in the eXtreme Design methodology<br>
+               <div style="margin-top:15px"> Please refer to <b><a class="text-light" href="http://stlab.istc.cnr.it/documents/ufes-nemo-visit/ontology-testing.pdf"><u>this article</u></a></b> for details.</div></div>
             <div class="col-md-1"> </div>
           </div>
     <div class ="row" style="width: 100%; margin: 0px; min-height: 100% ">
@@ -122,7 +125,9 @@
                           </div>
                           <div id="step1" class="collapse {% if active=='1' %}show{%endif %}" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-                                <div class="text-label" style="margin-bottom:35px">In this section it is possible to choose source of the test case <b>owl files</b> you want to run. It is provided the possibility to choose between a Github folder or upload them from local files. </div>
+                                <div class="text-label" style="margin-bottom:35px">
+                                    Choose the test cases you want to run (they must be <b>owl files</b>). <br>
+                                    You can load them from either a Github folder or from your local filesystem.</div>
                                     <form action="/" method="POST" enctype=multipart/form-data>
                                         <div class="form-group">
                                             <div class="custom-control custom-radio custom-control-inline">
@@ -135,6 +140,7 @@
                                               </div>
                                               <div id="holder">
                                                   <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase" required>
+                                                  <small id="emailHelp" class="form-text text-muted">Load files from a Github folder (github folder url required)</small>
                                               </div>
                                             <div id="keywordlabelholder">
                                             <div class="custom-control custom-checkbox" style="margin-top:20px">
@@ -142,10 +148,10 @@
                                               <label class="custom-control-label" for="keytrue">CQ FILTER</label>
                                             </div>
                                             <div id="keyword-holder"> </div>
-                                          <small id="emailHelp" class="form-text text-muted">Filter by filename</small>
+                                          <small id="emailHelp" class="form-text text-muted">Filter Github folder's files by filename</small>
                                           <div class="custom-control custom-checkbox" style="margin-top:20px">
                                               <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> 
-                                              <label class="custom-control-label"  for="subfo">Retrieve also Github SubFolders</label>
+                                              <label class="custom-control-label"  for="subfo">Load subfolders recursively</label>
                                             </div>
                                         </div>
                                         </div>
@@ -189,7 +195,7 @@
                                                     <div class="card-title">
                                                         {% if data %}
                                                             <h3> <span id="counter"></span> Selected File<span id="plural">s</span></h3>
-                                                            <div class="text-label">Now that Github source folder is selected, please check files to run</div>
+                                                            <div class="text-label">Select the files you want to test</div>
                                                             <div class="form-group">
                                                             <div class="custom-control custom-checkbox" style="margin-top:20px">
                                                               <input class="custom-control-input" type="checkbox" name="sel" id="selall" value="selall" checked onclick="ccchange(this)"> 
@@ -277,9 +283,9 @@
                                 {% if result and stats %}
                                 <div class="row bg-light" style="padding-top: 20px; padding-bottom: 20px; margin-top: 10px; border-radius: .25rem;" align="center">
                                   <div class="col-3"><h3>Test{% if stats[0]+stats[1]+stats[2] !=1 %}s{% endif %} Executed: {{ stats[0]+stats[1]+stats[2] }}</h3></div>
-                                  <div class="col-2"><i class="fas fa-check-circle fa-2x text-success"></i> <h3 style= "display: inline">{{ stats[0] }}</h3></div>
-                                  <div class="col-2"><i class="fas fa-question-circle fa-2x text-warning"></i> <h3 style= "display: inline">{{ stats[1] }}</h3></div>
-                                  <div class="col-2"><i class="fas fa-times-circle fa-2x text-danger"></i> <h3  style= "display: inline"> {{ stats[2] }}</h3></div>
+                                  <div class="col-2"><i class="fas fa-check-circle fa-2x text-success"></i> <h3 style= "display: inline">{{ stats[0] }}</h3><br><small>All Expected Results Matched</small></div>
+                                  <div class="col-2"><i class="fas fa-question-circle fa-2x text-warning"></i> <h3 style= "display: inline">{{ stats[1] }}</h3><br><small>Some Expected Results Matched</small></div>
+                                  <div class="col-2"><i class="fas fa-times-circle fa-2x text-danger"></i> <h3  style= "display: inline"> {{ stats[2] }}</h3><br><small>No Expected Results Matched</small></div>
                                   <div class="col-3">
                                         <h3>{{ stats[3] }}″</h3>
                                   </div>
@@ -348,11 +354,11 @@
                                                     
                                                     <div style="margin: 20px">
                                                         {% if dicti["status"] == True and not dicti["missingnumber"] %}
-                                                        <b class="alert alert-success">All Matched</b>
+                                                        <b class="alert alert-success">All Expected Results Matched</b>
                                                         {% elif dicti["status"] == False %}
-                                                        <b class="alert alert-danger">None Matched</b>
+                                                        <b class="alert alert-danger">No Expected Results Matched</b>
                                                         {% elif dicti["status"] == True and dicti["missingnumber"] %}
-                                                        <b class="alert alert-warning">Missing {{ dicti["missingnumber"]|int }} element{% if dicti["missingnumber"]|int > 1 %}s{% endif %} </b>
+                                                        <b class="alert alert-warning">Missing {{ dicti["missingnumber"]|int }} Expected Result{% if dicti["missingnumber"]|int > 1 %}s{% endif %} </b>
                                                         {% endif %}
                                                     </div>
                                                     <ul style="padding-right:40px">
@@ -424,15 +430,22 @@
 
           <!--FOOTER-->
           <footer class="footer bg-dark text-white" style="margin-bottom: 0px; padding: 20px">
-              <div class="container-fluid text-center py-2" style="font-size: 80%">
-                  <div  style="margin-bottom: 10px">
-                      <b>Powered by:</b>
-                      <a href="http://flask.pocoo.org/" class="text-light">Flask</a>, 
-                      <a href="https://getbootstrap.com/" class="text-light">Bootstrap</a>, 
-                      <a href="http://jinja.pocoo.org/" class="text-light">Jinja</a> 
+              <div class="container py-2" style="font-size: 80%">
+                <div class="row"style="margin-bottom: 10px">
+                  <div class="col-md-8" >
+                      <div ><b>Authors:</b> Valentina Anita Carriero, Fabio Mariani, Andrea Giovanni Nuzzolese, Valentina Pasqual, Valentina Presutti</div>
+                      <div><b>Main Developers:</b> Fabio Mariani, Valentina Pasqual</div>
+                      <div style="margin-top: 30px">
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" style="color: grey" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+                      </div>
+                    </div>
+                  <div class="col-md-4" >
+                    <img class="float-right" src="{{ url_for('static', filename='stlab.png') }}" width="40%">
+                    <img class="float-right" src="{{ url_for('static', filename='cnr.png') }}" width="40%"> 
+
                   </div>
-                  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" style="color: grey" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
               </div>
+            </div>
           </footer>
         <script src="{{ url_for('static', filename='engine.js') }}"> </script>
         
