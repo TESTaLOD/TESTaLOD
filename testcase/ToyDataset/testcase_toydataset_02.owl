@@ -20,7 +20,7 @@ SELECT ?CultProp ?Ars
 
 WHERE {
 ?arsm arcocd:hasMemberOfArchivalRecordSet ?CultProp ;
-    arcocd:hasArchivalRecordSet ?ars 
+    arcocd:hasArchivalRecordSet ?Ars 
 
 } LIMIT 6
 </testannotationschema:hasSPARQLQueryUnitTest>
