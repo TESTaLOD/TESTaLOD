@@ -14,7 +14,7 @@ def unescaper(string):
 
 # ************************************************************************
 
-def json_cleaner(json_data):   
+def json_cleaner(json_data):
     json_dict = json.loads(json_data)
     elements = json_dict.get("results")
     elements = elements.get("bindings")
@@ -171,6 +171,9 @@ def testaction (test):
 
         querydata = list(onto.metadata.hasSPARQLQueryUnitTest)[0]
         ontolist.append(querydata)
+
+        cqstring = list(onto.metadata.hasCQ)[0]
+        ontolist.append(cqstring)
         #testalod = Namespace("https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#")
         if str(datatype).split('.')[1] == "ToyDataset":
             status, missing, matchedlist = final_function(querydata, expecteddata, datauri, None)
