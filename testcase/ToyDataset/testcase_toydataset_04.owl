@@ -19,7 +19,7 @@ SELECT ?CultProp ?Ars
 
 WHERE {
 ?arsm arcocd:hasMemberOfArchivalRecordSet ?CultProp ;
-    arcocd:hasArchivalRecordSet ?ars 
+    arcocd:hasArchivalRecordSet ?Ars 
 
 } 
 </testannotationschema:hasSPARQLQueryUnitTest>
