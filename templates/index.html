@@ -128,7 +128,7 @@
                             <div class="card-body">
                                 <div class="text-label" style="margin-bottom:35px">
                                     Choose the test cases you want to run (they must be <b>owl files</b>). <br>
-                                    You can load them from either a Github folder or from your local filesystem.</div>
+                                    You can load them from a Github folder or browse them individually from a local path.</div>
                                     <form action="/" method="POST" enctype=multipart/form-data>
                                         <div class="form-group">
                                             <div class="custom-control custom-radio custom-control-inline">
@@ -149,7 +149,7 @@
                                               <label class="custom-control-label" for="keytrue">CQ FILTER</label>
                                             </div>
                                             <div id="keyword-holder"> </div>
-                                          <small id="emailHelp" class="form-text text-muted">Filter Github folder's files by filename</small>
+                                          <small id="emailHelp" class="form-text text-muted">Filter Github folder's files by filename (i.e. "testcase" will retrive files having "testcase" in their name)</small>
                                           <div class="custom-control custom-checkbox" style="margin-top:20px">
                                               <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> 
                                               <label class="custom-control-label"  for="subfo">Load subfolders recursively</label>
@@ -377,18 +377,18 @@
                                                           <ul style="list-style-type: none;">
                                                             {% if dicti["status"] == True and not dicti["missingnumber"] %}
                                                                     {% for elem in dicti["matched"] %}
-                                                                    <li class="alert alert-success">{{ elem.content }}</li>
+                                                                    <li class="alert alert-success">{{ elem.content |safe }}</li>
                                                                     {% endfor %}
                                                             {% elif dicti["status"] == False %}
                                                                     {% for elem in dicti["matched"] %}
-                                                                    <li class="alert alert-danger">{{ elem.content }}</li>
+                                                                    <li class="alert alert-danger">{{ elem.content |safe }}</li>
                                                                     {% endfor %}
                                                             {% elif dicti["status"] == True and dicti["missingnumber"] %}
                                                                     {% for elem in dicti["matched"] %}
                                                                             {% if elem.color == "Green" %}
-                                                                                    <li class="alert alert-success">{{ elem.content }}</li>
+                                                                                    <li class="alert alert-success">{{ elem.content |safe }}</li>
                                                                             {% elif elem.color == "Red" %}
-                                                                                    <li class="alert alert-danger">{{ elem.content }}</li>
+                                                                                    <li class="alert alert-danger">{{ elem.content |safe }}</li>
                                                                             {% endif %}
                                                                     {% endfor %}
                                                             {% endif %}

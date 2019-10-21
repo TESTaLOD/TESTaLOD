@@ -4,6 +4,8 @@ import rdflib
 from SPARQLWrapper import SPARQLWrapper, JSON
 import requests
 from owlready2 import *
+from json2table import convert
+
 
 
 def unescaper(string):
@@ -46,7 +48,10 @@ def json_comparer(query_result, expected_result):
             diz['color'] = 'Green'
         else:
             diz['color'] = 'Red'
-        diz['content'] = x
+        build_direction = "LEFT_TO_RIGHT"
+        table_attributes = {"style": "width:100%"}
+        html = convert(x, build_direction=build_direction, table_attributes=table_attributes)
+        diz['content'] = html
         lista.append(diz)
 
     if len(result_list) == len(expected_result): # 10 su 10 (li trova tutti)

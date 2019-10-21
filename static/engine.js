@@ -74,7 +74,7 @@
                 case 'local':
                     $("#keywordlabelholder").html("")
                     $("#holder").html("")
-                    $("#holder").html('<div class="custom-file" style="height:100% !important"> <input type="file" class="custom-file-input" id="customFile" name="localfile" accept=".owl" multiple required onchange="updateList()"> <label class="custom-file-label" for="customFile">Choose files</label> <div id="fileList"></div> </div><small id="emailHelp" class="form-text text-muted">Load owl files from your local filesystem (you can select one or more owl files)</small>')
+                    $("#holder").html('<div class="custom-file" style="height:100% !important"> <input type="file" class="custom-file-input" id="customFile" name="localfile" accept=".owl" multiple required onchange="updateList()"> <label class="custom-file-label" for="customFile">Choose files</label> <div id="fileList"></div> </div><small id="emailHelp" class="form-text text-muted">Load owl files from a local path (you can select one or more owl files)</small>')
                     $("#step2").hide()
                 break
         }
