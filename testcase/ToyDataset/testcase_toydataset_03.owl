@@ -16,7 +16,7 @@
         <testalod:hasInputTestDataUri rdf:resource="https://w3id.org/arco/test/CQ/ToyDatasets/Toyset_CQ18.ttl"/>
         <testannotationschema:hasSPARQLQueryUnitTest xml:lang="en">PREFIX arcocd: &lt;https://w3id.org/arco/context-description/&gt;
 
-SELECT *
+SELECT ?CultProp ?Ars
 
 WHERE {
 ?arsm arcocd:hasMemberOfArchivalRecordSet ?CultProp ;
