@@ -11,4 +11,4 @@ EXPOSE 8080
 
 # mvn exec:java -Dexec.mainClass="it.cnr.istc.stlab.ecodigit.entitylinking.EcodigitServer" -Dexec.args="/opt/entitylinking/config.properties"
 
-CMD ["/bin/bash","/opt/TESTaLOD/inferenceServices/docker/start.sh", $PORT]
+CMD /bin/bash /opt/TESTaLOD/inferenceServices/docker/start.sh $PORT
