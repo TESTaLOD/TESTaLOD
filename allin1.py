@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from cq_test_machine import *
+from consistency_machine import *
 import time
 from werkzeug.utils import secure_filename
 
@@ -88,6 +89,7 @@ def test ():
         list_total = list()
         for test in values:
             try:
+                print(test)
                 resulttest = testaction(test)
                 if resulttest == "nodata":
                     resultdict = dict()
@@ -115,6 +117,96 @@ def test ():
 def documentation():
     return render_template('documentation.html')
 
+@app.route('/consistency')
+def consistency():
+    return render_template('consistency.html', local=False, active='1')
+
+@app.route('/consistency', methods=['POST'])
+
+
+def consistenct_test_finder ():
+    try:
+        filekeyword = request.form['filekeyword']
+    except:
+        filekeyword = None
+    try:
+        subfolder = request.form['subfo']
+    except:
+        subfolder = None
+
+    try:
+        githubfolderurl = request.form['url']
+        try:
+            url = API_url(githubfolderurl)
+        except:
+            return render_template('consistency.html',local=False, wronguri=True, active='1')
+        try:
+            if subfolder:
+                test_list = subfinder(url, filekeyword, githubfolderurl)
+            else:
+                test_list = finder(url, filekeyword, githubfolderurl)
+
+        except:
+            return render_template('consistency.html',local=False, emptyfolder=True, active='1')
+        ntot = len(test_list)
+        return render_template('consistency.html', data=test_list, leng=ntot, active='2', local=False)
+    except:
+        req_list = request.files.getlist('localfile')
+        start = time.time()
+        list_local = list()
+        for filesreq in req_list:
+            try:
+                filename = secure_filename(filesreq.filename)
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                filesreq.save(filepath)
+                resulttest = consistency_action(filepath)
+                if resulttest == "nodata":
+                    os.remove(filepath)
+                    resultdict = dict()
+                    resultdict["input"] = filename
+                    resultdict["status"] = "errorinput"
+                    list_local.append(resultdict)
+                else:
+                    list_local.append(resulttest)
+                os.remove(filepath)
+            except:
+                os.remove(filepath)
+                resultdict = dict()
+                resultdict["input"] = filename
+                resultdict["status"] = "errorinput"
+                list_local.append(resultdict)
+        end = time.time()
+        timetot = round(end - start, 2)
+        stats = statmaker(list_local, timetot)
+        return render_template('consistency.html', result=list_local, stats=stats, active='3', local=True)
+
+@app.route('/consistency/test', methods=['POST'])
+
+def consistency_test ():
+    values = request.form.getlist('test')
+
+    if values:
+        start = time.time()
+        list_total = list()
+        for test in values:
+            try:
+                resulttest = consistency_action(test)
+                if resulttest == "nodata":
+                    resultdict = dict()
+                    resultdict["input"] = test
+                    resultdict["status"] = "errorinput"
+                    list_total.append(resultdict)
+                elif resulttest:
+                    list_total.append(resulttest)
+            except:
+                resultdict = dict()
+                resultdict["input"] = test
+                resultdict["status"] = "errorinput"
+                list_total.append(resultdict)
+        end = time.time()
+        timetot = round(end - start, 2)
+        stats = consistent_statmaker(list_total, timetot)
+        return render_template('consistency.html', result=list_total, stats= stats, active='3', local= False)
 
 @app.after_request
 def after_request(response):

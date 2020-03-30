@@ -78,12 +78,12 @@
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                             <a class="nav-link" href="/">
                             COMPETENCY QUESTIONS
                             </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                             <a class="nav-link" href="/consistency">
                             CONSISTENCY CHECK
                             </a>
@@ -100,16 +100,7 @@
             <a href="https://github.com/TESTaLOD/TESTaLOD" class="github-corner" aria-label="View source on GitHub" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
     <div class="container-fluid" style="padding: 0px;">
-        <div class ="row" style="width: 100%; margin: 0px;">
-            <div class="col-md-1"> </div>
-            <div class="col-md-10 bg-secondary text-white" style="padding:15px; margin-top: 15px; margin-bottom: 15px; border-radius: .25rem;"> 
-                TestaLOD is a tool supporting knowledge graph testing.<br>
-                It supports the automatisation of unit tests backward execution.<br>
-                Unit tests are usually modelled as competency questions e.g. in the eXtreme Design methodology<br>
-                <div style="margin-top:15px"> Please refer to <b><a class="text-light" href="{{ url_for('static', filename='article/testalo_wop.pdf') }}"><u>this article</u></a></b> for details.</div></div>
-               <!--- <div style="margin-top:15px"> Please refer to <b><a class="text-light" href="http://stlab.istc.cnr.it/documents/ufes-nemo-visit/ontology-testing.pdf"><u>this article</u></a></b> for details.</div></div>-->
-            <div class="col-md-1"> </div>
-          </div>
+
     <div class ="row" style="width: 100%; margin: 0px; min-height: 100% ">
         <div class="col-md-2">
         </div>
@@ -141,7 +132,7 @@
                                 <div class="text-label" style="margin-bottom:35px">
                                     Choose the test cases you want to run (they must be <b>owl files</b>). <br>
                                     You can load them from a Github folder or browse them individually from a local path.</div>
-                                    <form action="/" method="POST" enctype=multipart/form-data>
+                                    <form action="/consistency" method="POST" enctype=multipart/form-data>
                                         <div class="form-group">
                                             <div class="custom-control custom-radio custom-control-inline">
                                                 <input type="radio" class="custom-control-input" id="customRadio" name="input-path" value="url" checked>
@@ -152,7 +143,7 @@
                                                 <label class="custom-control-label" for="customRadio2">CQ LOCAL FILES</label>
                                               </div>
                                               <div id="holder">
-                                                  <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase" required>
+                                                  <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/ICCD-MiBACT/ArCo/tree/master/ArCo-release/test/VI" required>
                                                   <small id="emailHelp" class="form-text text-muted">Load files from a Github folder (github folder url required)</small>
                                               </div>
                                             <div id="keywordlabelholder">
@@ -201,7 +192,7 @@
                             <div class="card-body">
                                     <div style ="padding: 5px">
                                         <div align="right">
-                                            <a href="{{ url_for('index') }}"><button class="btn btn-secondary" type="button">GO BACK TO STEP #1</button></a>
+                                            <a href="{{ url_for('consistency') }}"><button class="btn btn-secondary" type="button">GO BACK TO STEP #1</button></a>
                                             </div>
 
                                                      
@@ -216,7 +207,7 @@
                                                             </div>
                                                             </div>
                                                             {% endif %}
-                                                    <form id="files" action= "/test"  method="POST">
+                                                    <form id="files" action= "/consistency/test"  method="POST">
                                                         <!-- <div class="card-title">
                                                             
                                                             <button id="fire2" type="submit" data-toggle="modal" data-target="#load" class="btn btn-primary" data-backdrop="static" data-keyboard="false">TEST!</button>
@@ -291,16 +282,15 @@
                           <div id="step3" class="collapse {% if active=='3' %}show{%endif %}" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="card-title" align="right">
-                                <a href="{{ url_for('index') }}"><button class="btn btn-secondary" type="button">RESTART</button></a>
+                                <a href="{{ url_for('consistency') }}"><button class="btn btn-secondary" type="button">RESTART</button></a>
  
                                 {% if result and stats %}
                                 <div class="row bg-light" style="padding-top: 20px; padding-bottom: 20px; margin-top: 10px; border-radius: .25rem;" align="center">
-                                  <div class="col-3"><h3>Test{% if stats[0]+stats[1]+stats[2] !=1 %}s{% endif %} Executed: {{ stats[0]+stats[1]+stats[2] }}</h3></div>
-                                  <div class="col-2"><i class="fas fa-check-circle fa-2x text-success"></i> <h3 style= "display: inline">{{ stats[0] }}</h3><br><small>All Expected Results Matched</small></div>
-                                  <div class="col-2"><i class="fas fa-question-circle fa-2x text-warning"></i> <h3 style= "display: inline">{{ stats[1] }}</h3><br><small>Some Expected Results Matched</small></div>
-                                  <div class="col-2"><i class="fas fa-times-circle fa-2x text-danger"></i> <h3  style= "display: inline"> {{ stats[2] }}</h3><br><small>No Expected Results Matched</small></div>
+                                  <div class="col-3"><h3>Test{% if stats[0]+stats[1] !=1 %}s{% endif %} Executed: {{ stats[0]+stats[1]}}</h3></div>
+                                  <div class="col-3"><i class="fas fa-check-circle fa-2x text-success"></i> <h3 style= "display: inline">{{ stats[0] }}</h3><br><small>Consistent</small></div>
+                                  <div class="col-3"><i class="fas fa-times-circle fa-2x text-danger"></i> <h3  style= "display: inline"> {{ stats[1] }}</h3><br><small>Inconsistent</small></div>
                                   <div class="col-3">
-                                        <h3>{{ stats[3] }}″</h3>
+                                        <h3>{{ stats[2] }}″</h3>
                                   </div>
                                 </div>
                                 {% endif %}
@@ -312,7 +302,7 @@
                                           {% if dicti["status"] == "errorinput" %}
                                           <div class="bg-danger text-light" style="padding-left: 3px; padding-right: 3px; border-radius: .25rem;">
                                               <i style= "display: inline-block" class="fas fa-exclamation-triangle fa-lg text-light"></i>
-                                              <h5 style= "display: inline-block">Wrong Input at: </h3>
+                                              <h5 style= "display: inline-block">Error at: </h3>
                                               {% if local==False %}
                                               <a style= "display: inline-block" target="_blank" class="text-light" href= {{ dicti["input"] }}>{{ dicti["input"].split('master', 1)[1] }}</a>
                                               <a style= "float: right; margin-top: 5px" href= {{ dicti["input"]|replace('master', 'blob/master', 1)|replace('raw.githubusercontent.com', 'github.com', 1) }} target="_blank">
@@ -324,12 +314,10 @@
                                             </div>
                                         </li>
                                         {% else %}
-                                          {% if dicti["status"] == True and not dicti["missingnumber"] %}
+                                          {% if dicti["status"] == True %}
                                           <i class="fas fa-check-circle text-success fa-lg"></i> 
                                           {% elif dicti["status"] == False %}
                                           <i class="fas fa-times-circle text-danger fa-lg"></i> 
-                                          {% elif dicti["status"] == True and dicti["missingnumber"] %}
-                                          <i class="fas fa-question-circle text-warning fa-lg"></i> 
                                           {% endif %}
                                           {% if local == False %}
                                         <a href= {{ dicti["input"][0] }} target="_blank"> {{ dicti["input"][0].split('master', 1)[1] }}</a>    
@@ -366,49 +354,19 @@
                                                 
                                                     
                                                     <div style="margin: 20px">
-                                                        {% if dicti["status"] == True and not dicti["missingnumber"] %}
-                                                        <b class="alert alert-success">All Expected Results Matched</b>
+                                                        {% if dicti["status"] == True %}
+                                                        <b class="alert alert-success">Consistent</b>
                                                         {% elif dicti["status"] == False %}
-                                                        <b class="alert alert-danger">No Expected Results Matched</b>
-                                                        {% elif dicti["status"] == True and dicti["missingnumber"] %}
-                                                        <b class="alert alert-warning">Missing {{ dicti["missingnumber"]|int }} Expected Result{% if dicti["missingnumber"]|int > 1 %}s{% endif %} </b>
+                                                        <b class="alert alert-danger">Inconsistent</b>
                                                         {% endif %}
                                                     </div>
                                                     <ul style="padding-right:40px">
                                                         <li style="margin-bottom: 10px">
-                                                            <b>HasCQ: </b>{{ dicti["input"][5] }}</a>
+                                                            <b>hasRequirement: </b>{{ dicti["input"][1] }}</a>
                                                         </li>
                                                         <li style="margin-bottom: 10px">
-                                                            <b>HasInputTestDataCategory: </b>{{ dicti["input"][2] }}</a>
-                                                        </li>
-                                                        <li style="margin-bottom: 10px">
-                                                          <b>HasInputTestDataUri: </b> <a href= {{ dicti["input"][3] }} target="_blank">{{ dicti["input"][3] }}</a>
-                                                      </li>
-                                                        <li style="margin-bottom: 10px">
-                                                            <b>HasSPARQLQueryUnitTest:</b><pre class="alert bg-light"style="margin-left:40px; margin-top: 10px"><code>{{ dicti["input"][4] }}</code></pre>
-                                                        </li>
-                                                        <li style="margin-bottom: 10px">
-                                                            <b>HasExpectedResult: </b>
-                                                          <ul style="list-style-type: none;">
-                                                            {% if dicti["status"] == True and not dicti["missingnumber"] %}
-                                                                    {% for elem in dicti["matched"] %}
-                                                                    <li class="alert alert-success">{{ elem.content |safe }}</li>
-                                                                    {% endfor %}
-                                                            {% elif dicti["status"] == False %}
-                                                                    {% for elem in dicti["matched"] %}
-                                                                    <li class="alert alert-danger">{{ elem.content |safe }}</li>
-                                                                    {% endfor %}
-                                                            {% elif dicti["status"] == True and dicti["missingnumber"] %}
-                                                                    {% for elem in dicti["matched"] %}
-                                                                            {% if elem.color == "Green" %}
-                                                                                    <li class="alert alert-success">{{ elem.content |safe }}</li>
-                                                                            {% elif elem.color == "Red" %}
-                                                                                    <li class="alert alert-danger">{{ elem.content |safe }}</li>
-                                                                            {% endif %}
-                                                                    {% endfor %}
-                                                            {% endif %}
-                                                          </ul>
-                                                        </li>                                       
+                                                          <b>HasInputTestDataUri: </b> <a href= {{ dicti["input"][0] }} target="_blank">{{ dicti["input"][0] }}</a>
+                                                      </li>                                   
                                                 </ul>
                                               </div>
                                               <div class="modal-footer">
@@ -465,7 +423,7 @@
               </div>
             </div>
           </footer>
-        <script src="{{ url_for('static', filename='engine.js') }}"> </script>
+        <script src="{{ url_for('static', filename='engineCons.js') }}"> </script>
         
 </body>
 
