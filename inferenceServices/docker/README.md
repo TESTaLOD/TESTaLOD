@@ -12,7 +12,7 @@ docker build . --no-cache -t inference_services
 ### Run
 
 ```
-docker run --name inference_services -p8080:8080 inference_services
+docker run --name inference_services -p 8080:8080 -e PORT=8080 inference_services
 ```
 
 At this point the server will be listening on port 8080.
