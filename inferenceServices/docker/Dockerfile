@@ -1,10 +1,7 @@
-FROM maven:3.6.3-jdk-8
+FROM openjdk:8-alpine
+
+RUN apk add curl && \
+	curl -OL https://www.dropbox.com/s/pssf870uxnwern2/inference-service-0.0.1.jar
 
 
-RUN cd /opt && \
-	git clone https://github.com/luigi-asprino/TESTaLOD.git  && \
-	cd /opt/TESTaLOD/inferenceServices  && \
-	mvn clean install
-
-
-CMD /bin/bash /opt/TESTaLOD/inferenceServices/docker/start.sh $PORT
+CMD java -jar inference-service-0.0.1.jar $PORT
