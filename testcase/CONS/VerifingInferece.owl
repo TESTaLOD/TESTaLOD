@@ -19,12 +19,16 @@ A Roman coin:
 - was obtained from a purchase.
 - has a photographic documentation made up of a black / white photo
          </testannotationschema:hasInferenceRequirement>
+        <testannotationschema:hasInferenceRequirement xml:lang="it">Una moneta romana:
+-è un bene numismatico.
+-ha some soggetto &quot;Giulio Cesare&quot;.
+-è in posseso di un Comune italiano.
+-ha una cronologia ottenuta da un&apos;analisi tipologica.
+-è stata ottenuta da un acquisto.
+-ha una documentazione fotografica composta da una foto in bianco/nero</testannotationschema:hasInferenceRequirement>
         <testannotationschema:hasInputTestData rdf:resource="https://w3id.org/arco/test/VI/ToyDatasets/Toyset_VI01.owl"/>
         <testannotationschema:testDate xml:lang="en">2019-02-20</testannotationschema:testDate>
         <testannotationschema:testedBy xml:lang="en">Ran by Valentina Pasqual and Fabio Mariani</testannotationschema:testedBy>
         <rdfs:comment xml:lang="en">Test on ArCo release 0.4</rdfs:comment>
     </owl:Ontology>
 </rdf:RDF>
-
-
-

@@ -67,7 +67,7 @@
             switch ($(this).val()) {
                 case 'url':
                         $("#holder").html("")
-                        $("#holder").html('<input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase" required> <small id="emailHelp" class="form-text text-muted">Load owl files from a Github folder (github folder url required)</small>')
+                        $("#holder").html('<input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase/CONS" required> <small id="emailHelp" class="form-text text-muted">Load owl files from a Github folder (github folder url required)</small>')
                         $("#keywordlabelholder").html('<div class="custom-control custom-checkbox" style="margin-top:20px"> <input type="checkbox" class="custom-control-input" id="keytrue" name="keytrue" onchange="keycheck(this)"> <label class="custom-control-label" for="keytrue">CQ FILTER</label> </div> <div id="keyword-holder"> </div> <small id="emailHelp" class="form-text text-muted">Filter Github folder\'s files by filename</small> <div class="custom-control custom-checkbox" style="margin-top:20px"> <input class="custom-control-input" type="checkbox" name="subfo" id="subfo" value="subfo" checked> <label class="custom-control-label" for="subfo">Load subfolders recursively</label> </div>')
                         $("#step2").show()
                     break
