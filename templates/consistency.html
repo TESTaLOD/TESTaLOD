@@ -85,7 +85,7 @@
                     </li>
                     <li class="nav-item active">
                             <a class="nav-link" href="/consistency">
-                            CONSISTENCY CHECK
+                            CONSISTENCY CHECK (<span class="text-danger">BETA</span>)
                             </a>
                     </li>
                     <li class="nav-item">
@@ -130,20 +130,11 @@
                           <div id="step1" class="collapse {% if active=='1' %}show{%endif %}" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                 <div class="text-label" style="margin-bottom:35px">
-                                    Choose the test cases you want to run (they must be <b>owl files</b>). <br>
-                                    You can load them from a Github folder or browse them individually from a local path.</div>
+                                    Choose the test cases you want to run (they must be <b>owl files</b>).</div>
                                     <form action="/consistency" method="POST" enctype=multipart/form-data>
                                         <div class="form-group">
-                                            <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" class="custom-control-input" id="customRadio" name="input-path" value="url" checked>
-                                                <label class="custom-control-label" for="customRadio">CQ GITHUB FOLDER URL</label>
-                                              </div>
-                                              <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" class="custom-control-input" id="customRadio2" name="input-path" value="local">
-                                                <label class="custom-control-label" for="customRadio2">CQ LOCAL FILES</label>
-                                              </div>
                                               <div id="holder">
-                                                  <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/TESTaLOD/TESTaLOD/tree/master/testcase/CONS" required>
+                                                  <input type="text" class="form-control" id="urlinput" name="url" value="https://github.com/ICCD-MiBACT/ArCo/tree/master/ArCo-release/test/VI" required>
                                                   <small id="emailHelp" class="form-text text-muted">Load files from a Github folder (github folder url required)</small>
                                               </div>
                                             <div id="keywordlabelholder">

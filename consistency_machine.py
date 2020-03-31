@@ -3,9 +3,10 @@ from owlready2 import *
 from rdflib import Graph, Namespace, Literal
 from rdflib.namespace import XSD
 def consistency_action(test):
-    onto = get_ontology(test).load()
     ontolist = list()
+    onto = get_ontology(test).load()
     ontolist.append(test)
+    print(onto.metadata.hasInferenceRequirement)
     try:
         requirements = list(onto.metadata.hasInferenceRequirement)[0]
     except:
@@ -14,6 +15,7 @@ def consistency_action(test):
     datatype = list(onto.metadata.hasInputTestData)[0]
     ontolist.append(datatype)
     status = consistency_check(test)
+
 
     if status == "nodata":
         return "nodata"
@@ -26,7 +28,10 @@ def consistency_action(test):
         return resultdict
 
 def consistency_check(test):
-    r = requests.get("https://testalodinf.herokuapp.com/consistencyCheck?IRI=" + test)
+    try:
+        r = requests.get("https://testalodinf.herokuapp.com/consistencyCheck?IRI=" + test)
+    except:
+        print("REQUEST")
     if r.status_code == 200:
         j0 = Namespace("http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#")
         g = Graph()
