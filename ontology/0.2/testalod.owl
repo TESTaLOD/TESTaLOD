@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#"
+     xml:base="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ontology="https://w3id.org/arco/testalod/ontology/"
+     xmlns:testannotationschema="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#">
+    <owl:Ontology rdf:about="https://w3id.org/arco/testalod/ontology/">
+        <owl:versionIRI rdf:resource="https://w3id.org/arco/testalod/ontology/0.2"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl"/>
+        <rdfs:comment xml:lang="en">An extension of ODP&apos;s test annotation schema ontology that enables to define TestALod test cases.</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataCategory -->
+
+    <owl:AnnotationProperty rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataCategory">
+        <rdfs:comment>Deprecated, use https://w3id.org/arco/testalod/hasInputTestDataCategory instead.</rdfs:comment>
+        <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataUri -->
+
+    <owl:AnnotationProperty rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#hasInputTestDataUri">
+        <rdfs:comment xml:lang="en">Deprecated. Use https://w3id.org/arco/ontology/testalod/hasInputTestDataUri instead</rdfs:comment>
+        <owl:deprecated xml:lang="en">true</owl:deprecated>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://w3id.org/arco/testalod/ontology/hasInputTestDataCategory -->
+
+    <owl:AnnotationProperty rdf:about="https://w3id.org/arco/testalod/ontology/hasInputTestDataCategory">
+        <rdfs:comment xml:lang="en">It is used to indicate the data category (e.g. dataset, sparql endpoint) used to run the test case.</rdfs:comment>
+        <rdfs:label>has input data category</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- https://w3id.org/arco/testalod/ontology/hasInputTestDataUri -->
+
+    <owl:AnnotationProperty rdf:about="https://w3id.org/arco/testalod/ontology/hasInputTestDataUri">
+        <rdfs:comment xml:lang="en">It indicates the URI of the input data used to run the test case.</rdfs:comment>
+        <rdfs:label xml:lang="en">has input data URI</rdfs:label>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint -->
+
+    <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint">
+        <owl:sameAs rdf:resource="https://w3id.org/arco/testalod/ontology/SPARQLEndpoint"/>
+        <rdfs:comment xml:lang="en">Deprecated. Use https://w3id.org/arco/ontology/testalod/SPARQLEndpoint instead.</rdfs:comment>
+        <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#ToyDataset -->
+
+    <owl:NamedIndividual rdf:about="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#ToyDataset">
+        <owl:sameAs rdf:resource="https://w3id.org/arco/testalod/ontology/ToyDataset"/>
+        <rdfs:comment xml:lang="en">Deprecated. Use https://w3id.org/arco/ontology/testalod/ToyDataset instead.</rdfs:comment>
+        <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/arco/testalod/ontology/SPARQLEndpoint -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/arco/testalod/ontology/SPARQLEndpoint">
+        <rdfs:comment xml:lang="en">It indicates that the test case is defined with respect to a test case.</rdfs:comment>
+        <rdfs:label xml:lang="en">SPARQL Endpoint</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://w3id.org/arco/testalod/ontology/ToyDataset -->
+
+    <owl:NamedIndividual rdf:about="https://w3id.org/arco/testalod/ontology/ToyDataset">
+        <rdfs:comment xml:lang="en">It indicates that the test case is defined with respect to a Toy Dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">Toy Dataset</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
