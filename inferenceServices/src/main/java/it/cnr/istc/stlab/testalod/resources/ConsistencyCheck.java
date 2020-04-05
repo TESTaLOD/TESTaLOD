@@ -9,7 +9,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
@@ -28,9 +27,9 @@ public class ConsistencyCheck {
 		Model m;
 		try {
 			if (Utils.checkConsistency(iri)) {
-				m = getTrue(iri);
+				m = Utils.getTrue(iri);
 			} else {
-				m = getFalse(iri);
+				m = Utils.getFalse(iri);
 			}
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			m.write(bos, "RDF/XML");
@@ -39,24 +38,6 @@ public class ConsistencyCheck {
 			e.printStackTrace();
 		}
 		return Response.serverError().build();
-	}
-
-	private static Model getFalse(String iri) {
-		Model m = ModelFactory.createDefaultModel();
-		m.addLiteral(m.createResource(iri),
-				m.createProperty(
-						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
-				false);
-		return m;
-	}
-
-	private static Model getTrue(String iri) {
-		Model m = ModelFactory.createDefaultModel();
-		m.addLiteral(m.createResource(iri),
-				m.createProperty(
-						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
-				true);
-		return m;
 	}
 
 }

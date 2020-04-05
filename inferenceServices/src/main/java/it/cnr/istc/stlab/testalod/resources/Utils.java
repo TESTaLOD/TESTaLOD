@@ -1,5 +1,7 @@
 package it.cnr.istc.stlab.testalod.resources;
 
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -22,6 +24,8 @@ public class Utils {
 	public static final String SPARQLENDPOINT_DATACATEGORY_OLD = "https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint";
 	public static final String TESTANNOTATIONSCHEMA_HASSPARQLQUERYUNITTEST = TESTANNOTATIONSCCHEMA_PREFIX
 			+ "hasSPARQLQueryUnitTest";
+	public static final String TESTANNOTATIONSCHEMA_HASEXPECTEDRESULT = TESTANNOTATIONSCCHEMA_PREFIX
+			+ "hasExpectedResult";
 
 	static boolean checkConsistency(String iriTestCase) throws OWLOntologyCreationException {
 
@@ -58,6 +62,24 @@ public class Utils {
 
 		return reasoner.isConsistent();
 
+	}
+
+	static Model getFalse(String iri) {
+		Model m = ModelFactory.createDefaultModel();
+		m.addLiteral(m.createResource(iri),
+				m.createProperty(
+						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
+				false);
+		return m;
+	}
+
+	static Model getTrue(String iri) {
+		Model m = ModelFactory.createDefaultModel();
+		m.addLiteral(m.createResource(iri),
+				m.createProperty(
+						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
+				true);
+		return m;
 	}
 
 }

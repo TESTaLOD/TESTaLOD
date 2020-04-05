@@ -14,6 +14,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
+import it.cnr.istc.stlab.testalod.workers.IntegrityConstraintCheckWorker;
+import it.cnr.istc.stlab.testalod.workers.TestALODException;
+
 @Path("/integrityConstraintCheck")
 public class IntegrityConstraintCheck {
 
@@ -23,40 +26,23 @@ public class IntegrityConstraintCheck {
 	@Produces("application/rdf+xml")
 	public Response consistencyCheck(@QueryParam("IRI") String iri) {
 
-		logger.trace("Checking consistency of " + iri);
+		logger.trace("Integrity constraint check " + iri);
 
-		Model m;
 		try {
-			if (Utils.checkConsistency(iri)) {
-				m = getTrue(iri);
+			IntegrityConstraintCheckWorker iccw = new IntegrityConstraintCheckWorker(iri);
+			Model m;
+			if (iccw.run()) {
+				m = Utils.getTrue(iri);
 			} else {
-				m = getFalse(iri);
+				m = Utils.getFalse(iri);
 			}
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			m.write(bos, "RDF/XML");
 			return Response.ok(bos.toString()).build();
-		} catch (OWLOntologyCreationException e) {
+		} catch (TestALODException e) {
 			e.printStackTrace();
 		}
 		return Response.serverError().build();
-	}
-
-	private static Model getFalse(String iri) {
-		Model m = ModelFactory.createDefaultModel();
-		m.addLiteral(m.createResource(iri),
-				m.createProperty(
-						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
-				false);
-		return m;
-	}
-
-	private static Model getTrue(String iri) {
-		Model m = ModelFactory.createDefaultModel();
-		m.addLiteral(m.createResource(iri),
-				m.createProperty(
-						"http://www.ontologydesignpatterns.org/schemas/testannotationschema.owl#hasActualResult"),
-				true);
-		return m;
 	}
 
 }
