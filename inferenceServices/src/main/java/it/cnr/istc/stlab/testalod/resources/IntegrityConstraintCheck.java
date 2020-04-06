@@ -9,10 +9,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import it.cnr.istc.stlab.testalod.workers.IntegrityConstraintCheckWorker;
 import it.cnr.istc.stlab.testalod.workers.TestALODException;
@@ -32,14 +30,17 @@ public class IntegrityConstraintCheck {
 			IntegrityConstraintCheckWorker iccw = new IntegrityConstraintCheckWorker(iri);
 			Model m;
 			if (iccw.run()) {
+				logger.trace("true");
 				m = Utils.getTrue(iri);
 			} else {
+				logger.trace("false");
 				m = Utils.getFalse(iri);
 			}
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
 			m.write(bos, "RDF/XML");
 			return Response.ok(bos.toString()).build();
 		} catch (TestALODException e) {
+			logger.trace("Error "+e.getMessage());
 			e.printStackTrace();
 		}
 		return Response.serverError().build();

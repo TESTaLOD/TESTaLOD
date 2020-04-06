@@ -22,11 +22,6 @@ public class TestaLODServer {
 
 	public static void main(String[] args) throws JsonParseException, JsonMappingException, IOException {
 
-//		if (args.length > 0) {
-//			logger.info("Configuration File " + args[0]);
-//			TestaLODConfiguration.setConfigFile(args[0]);
-//		}
-
 		int port = Integer.parseInt(args[0]);
 
 		// Jetty server
