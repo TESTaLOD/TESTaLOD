@@ -34,6 +34,7 @@ WHERE {?publication arco-cd:hasTitle ?pubtitle .
     { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;vasi candelabri cippi sarcophagi tripodi lucerne ed ornamenti antichi dise gnati ed incisi dal cav. gio. batta. piranesi&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500310077-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500310077-frontespizio&quot; }} ] } }</testannotationschema:hasExpectedResult>
         <testannotationschema:testedBy xml:lang="en">Run by Valentina Pasqual and Fabio Mariani</testannotationschema:testedBy>
         <rdfs:comment xml:lang="en">TESTaLOD example</rdfs:comment>
+        <testalod:hasInputTestDataCategory rdf:resource="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl#SPARQLendpoint"/>
     </owl:Ontology>
 </rdf:RDF>
 
