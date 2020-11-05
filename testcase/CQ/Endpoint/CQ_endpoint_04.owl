@@ -13,6 +13,7 @@
         <owl:imports rdf:resource="https://raw.githubusercontent.com/TESTaLOD/TESTaLOD/master/ontology/testalod.owl"/>
         <testannotationschema:testDate>2019-06-18</testannotationschema:testDate>
         <testannotationschema:hasCQ xml:lang="it">In quale posizione (es.: frontespizio, copertina, etc.) di una specifica pubblicazione è stata riprodotta la stampa X?</testannotationschema:hasCQ>
+        <testalod:hasInputTestDataUri rdf:resource="http://wit.istc.cnr.it/arco/virtuoso/sparql"/>
         <testannotationschema:hasSPARQLQueryUnitTest xml:lang="en">PREFIX arco-cd: &lt;https://w3id.org/arco/ontology/context-description/&gt;
 SELECT ?title ?reproduction ?position
 WHERE {?publication arco-cd:hasTitle ?pubtitle .
