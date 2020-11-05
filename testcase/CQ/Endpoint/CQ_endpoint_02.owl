@@ -20,7 +20,8 @@ SELECT ?title ?reproduction ?position
 WHERE {pub:0900344184-print-in-publication-1 arco-cd:hasTitle ?pubtitle .
 ?pubtitle rdfs:label ?title .
 ?publication arco-cd:hasReproduction ?reproduction .
-?reproduction arco-cd:hasReproductionPosition ?position } Limit 9</testannotationschema:hasSPARQLQueryUnitTest>
+?reproduction arco-cd:hasReproductionPosition ?position } 
+LIMIT 10</testannotationschema:hasSPARQLQueryUnitTest>
         <testannotationschema:hasExpectedResult xml:lang="it">{ &quot;head&quot;: { &quot;link&quot;: [], &quot;vars&quot;: [&quot;title&quot;, &quot;reproduction&quot;, &quot;position&quot;] },
   &quot;results&quot;: { &quot;distinct&quot;: false, &quot;ordered&quot;: true, &quot;bindings&quot;: [
     { &quot;title&quot;: { &quot;type&quot;: &quot;literal&quot;, &quot;value&quot;: &quot;Combattimento e Balletto a Cavallo Rappresentato in Notte in Fiorenza A' Serenissimi Arciduchi e Arciduchessa d'Austria Ferdinando Carlo Anna di Toscana e Sigismondo Francesco nel Teatro contiguo al Palazzo del Serenissimo Gran Duca&quot; }	, &quot;reproduction&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/Reproduction/1500316901-reproduction&quot; }	, &quot;position&quot;: { &quot;type&quot;: &quot;uri&quot;, &quot;value&quot;: &quot;https://w3id.org/arco/resource/ReproductionPosition/1500316901-frontespizio&quot; }},
